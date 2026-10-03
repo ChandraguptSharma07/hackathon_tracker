@@ -12,6 +12,10 @@
     <div class="wrap">
       <h1>Hackathon Tracker</h1>
       <p class="sub" id="summary">Loading…</p>
+      <nav class="quick" aria-label="Quick views">
+        Quick view:
+        <a href="?metro=Delhi+NCR&amp;mode=onsite">In person in Delhi NCR</a>
+      </nav>
     </div>
   </header>
 
@@ -30,12 +34,16 @@
           <select name="mode">
             <option value="">Any</option>
             <option value="online">Online</option>
-            <option value="in_person">In person</option>
+            <option value="onsite">In person or hybrid</option>
+            <option value="in_person">In person only</option>
             <option value="hybrid">Hybrid</option>
           </select>
         </label>
         <label>Sponsor
           <select name="sponsor"><option value="">Any</option></select>
+        </label>
+        <label>Near
+          <select name="metro"><option value="">Anywhere</option></select>
         </label>
         <label>Country
           <select name="country"><option value="">Any</option></select>

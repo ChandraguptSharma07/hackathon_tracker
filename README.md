@@ -17,6 +17,12 @@ background and you just reload the page. Needs [uv](https://docs.astral.sh/uv/).
 Options pass straight through: `./launch --port 9000`, `./launch --no-open`,
 `./launch --no-fetch`, `./launch --host 0.0.0.0` (open it from your phone on the same network).
 
+`./launch --metro delhi` opens straight on in-person and hybrid events in Delhi NCR (Delhi,
+Gurugram, Noida, Greater Noida, Ghaziabad, Faridabad). The same view is the "In person in Delhi
+NCR" quick link on the page, and the "Near" filter covers Bengaluru, Mumbai, Hyderabad, Pune,
+Chennai, SF Bay Area, New York and London too. Metro aliases live in
+`src/hackathon_tracker/places.py`.
+
 Listings are pulled from public data on:
 
 | Source | How | Strong on |
@@ -28,7 +34,7 @@ Listings are pulled from public data on:
 | HackerEarth | Events feed | Online hackathons |
 | Cerebral Valley | JSON-LD | AI lab hackathons (Anthropic, OpenAI, DeepMind) |
 | lablab.ai | Next.js payload | Online AI hackathons (AMD, IBM, Meta…) |
-| lu.ma | Discover search around 20 tech hubs | In-person AI and startup hackathons (incl. lab-run ones) |
+| lu.ma | Discover search around 22 tech hubs | In-person AI and startup hackathons (incl. lab-run ones) |
 | ETHGlobal | Next.js payload | Ethereum hackathons |
 | DoraHacks | JSON API behind the site | Web3 and AI hackathons |
 | TAIKAI | Next.js Apollo cache | European hackathons and innovation challenges |

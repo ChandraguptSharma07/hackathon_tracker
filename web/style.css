@@ -46,6 +46,8 @@ a { color: var(--accent); }
 .top { padding: 28px 0 12px; }
 .top h1 { margin: 0; font-size: 26px; letter-spacing: -0.01em; }
 .sub { margin: 4px 0 0; color: var(--muted); }
+.quick { margin-top: 8px; font-size: 14px; color: var(--muted); }
+.quick a { margin-left: 4px; font-weight: 600; }
 
 .filters {
   position: sticky;

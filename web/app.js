@@ -90,7 +90,10 @@ function filtered() {
   const out = all.filter((h) => {
     if (h.allSources.every((s) => disabledSources.has(s))) return false;
     if (f.kind && (h.kind || "hackathon") !== f.kind) return false;
-    if (f.mode && h.mode !== f.mode) return false;
+    if (f.mode === "onsite") {
+      if (h.mode !== "in_person" && h.mode !== "hybrid") return false;
+    } else if (f.mode && h.mode !== f.mode) return false;
+    if (f.metro && h.metro !== f.metro) return false;
     if (f.sponsor && !(h.sponsors || []).includes(f.sponsor)) return false;
     if (f.country && h.countryName !== f.country) return false;
     if (f.within && !(h.deadline && h.deadline - now <= f.within * DAY && h.deadline >= now)) return false;
@@ -286,6 +289,7 @@ async function main() {
   trackingSince = new Date(feed.tracking_since || 0);
   all = feed.hackathons.map(prepare);
   fillSelect("sponsor", counts(all.flatMap((h) => h.sponsors || [])));
+  fillSelect("metro", counts(all.map((h) => h.metro)));
   fillSelect("country", counts(all.map((h) => h.countryName)));
   readState();
   sourceChips(feed.sources);
