@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# One-command launcher: installs dependencies on first run, refreshes the data if it is
+# older than 6 hours, starts the site and opens it in your browser.
+#   ./launch               normal start
+#   ./launch --port 9000   any `hackathon-tracker serve` option works here
+set -euo pipefail
+cd "$(dirname "$0")"
+
+if ! command -v uv >/dev/null 2>&1; then
+  echo "uv is required: https://docs.astral.sh/uv/getting-started/installation/" >&2
+  exit 1
+fi
+
+exec uv run --quiet hackathon-tracker serve "$@"

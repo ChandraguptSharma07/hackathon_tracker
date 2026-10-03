@@ -43,7 +43,7 @@ def _run_source(name: str, fetch: Fetcher) -> tuple[list[Hackathon], SourceHealt
         with make_client() as client:
             items = fetch(client)
     except Exception as exc:  # one broken site must not sink the whole feed
-        log.exception("source %s failed", name)
+        log.warning("source %s failed: %s", name, exc, exc_info=log.isEnabledFor(logging.DEBUG))
         return [], SourceHealth(ok=False, count=0, seconds=round(time.monotonic() - start, 2),
                                 error=f"{type(exc).__name__}: {exc}"[:300])
     health = SourceHealth(ok=bool(items), count=len(items),
@@ -116,4 +116,6 @@ def build_feed(sources: dict[str, Fetcher] | None = None, previous: Feed | None 
 def write_feed(feed: Feed, path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     data = feed.model_dump(mode="json", exclude_none=True)
-    path.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")))
+    tmp = path.with_suffix(".tmp")  # write then rename, so readers never see half a file
+    tmp.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")))
+    tmp.replace(path)

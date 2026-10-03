@@ -1,30 +1,18 @@
 import argparse
 import logging
 import sys
+from datetime import timedelta
 from pathlib import Path
 
 from .pipeline import build_feed, load_previous, write_feed
 from .sources import SOURCES
 
-DEFAULT_OUT = Path("web/data/hackathons.json")
+ROOT = Path(__file__).resolve().parents[2]
+WEB_DIR = ROOT / "web"
+DEFAULT_OUT = WEB_DIR / "data" / "hackathons.json"
 
 
-def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="hackathon-tracker",
-                                     description="Aggregate hackathon listings into one feed.")
-    sub = parser.add_subparsers(dest="command", required=True)
-    fetch = sub.add_parser("fetch", help="fetch all sources and write the JSON feed")
-    fetch.add_argument("--out", type=Path, default=DEFAULT_OUT)
-    fetch.add_argument("--only", help="comma-separated source names, e.g. devpost,mlh")
-    sub.add_parser("sources", help="list available sources")
-    args = parser.parse_args(argv)
-
-    logging.basicConfig(level=logging.WARNING, format="%(levelname)s %(name)s: %(message)s")
-
-    if args.command == "sources":
-        print("\n".join(SOURCES))
-        return 0
-
+def _fetch(args, parser) -> int:
     sources = SOURCES
     if args.only:
         names = [n.strip() for n in args.only.split(",")]
@@ -41,6 +29,44 @@ def main(argv: list[str] | None = None) -> int:
         print(f"{name:15} {status:6} {h.count:4}  {h.seconds:5.1f}s  {h.error or ''}")
     print(f"{feed.count} hackathons written to {args.out}")
     return 0 if any(h.ok for h in feed.sources.values()) else 1
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(prog="hackathon-tracker",
+                                     description="Aggregate hackathon listings into one feed.")
+    parser.add_argument("-v", "--verbose", action="store_true", help="show tracebacks")
+    sub = parser.add_subparsers(dest="command", required=True)
+
+    fetch = sub.add_parser("fetch", help="fetch all sources and write the JSON feed")
+    fetch.add_argument("--out", type=Path, default=DEFAULT_OUT)
+    fetch.add_argument("--only", help="comma-separated source names, e.g. devpost,mlh")
+
+    serve = sub.add_parser("serve", help="refresh data if old, run the site, open the browser")
+    serve.add_argument("--port", type=int, default=8000)
+    serve.add_argument("--host", default="127.0.0.1",
+                       help="use 0.0.0.0 to reach it from other devices on your network")
+    serve.add_argument("--no-open", action="store_true", help="don't open a browser")
+    serve.add_argument("--no-fetch", action="store_true", help="serve existing data only")
+    serve.add_argument("--max-age", type=float, default=6,
+                       help="refresh when data is older than this many hours (default 6)")
+
+    sub.add_parser("sources", help="list available sources")
+    args = parser.parse_args(argv)
+
+    logging.basicConfig(level=logging.DEBUG if args.verbose else logging.WARNING,
+                        format="%(levelname)s %(name)s: %(message)s")
+    logging.getLogger("httpx").setLevel(logging.WARNING)
+
+    if args.command == "sources":
+        print("\n".join(SOURCES))
+        return 0
+    if args.command == "serve":
+        from .serve import serve as run_server
+        run_server(WEB_DIR, DEFAULT_OUT, host=args.host, port=args.port,
+                   open_browser=not args.no_open, max_age=timedelta(hours=args.max_age),
+                   fetch=not args.no_fetch)
+        return 0
+    return _fetch(args, parser)
 
 
 if __name__ == "__main__":
