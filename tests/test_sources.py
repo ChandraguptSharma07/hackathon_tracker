@@ -166,3 +166,13 @@ def test_zindi_keeps_open_and_parses_spaced_prize(fixture):
     assert len(items) == 2
     assert all(h.kind == "competition" for h in items)
     assert (items[0].prize_amount, items[0].prize_currency) == (25000, "USD")
+
+
+@pytest.mark.parametrize("title,dropped", [
+    ("Junior Robo Sumo", True), ("Junior Robo-Race", True),
+    ("Valorant Tournament – Battle Zone", True),
+    ("Poster Exhibition", True), ("HackRobo 2.0", False), ("Startupathon", False),
+    ("Competitive Programming Hackathon", False),
+])
+def test_unstop_fest_events(title, dropped):
+    assert unstop.is_fest_event(title) is dropped

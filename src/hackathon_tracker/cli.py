@@ -3,8 +3,10 @@ import logging
 import sys
 from datetime import timedelta
 from pathlib import Path
+from urllib.parse import urlencode
 
 from .pipeline import build_feed, load_previous, write_feed
+from .places import METRO_ALIASES, resolve
 from .sources import SOURCES
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -49,6 +51,9 @@ def main(argv: list[str] | None = None) -> int:
     serve.add_argument("--no-fetch", action="store_true", help="serve existing data only")
     serve.add_argument("--max-age", type=float, default=6,
                        help="refresh when data is older than this many hours (default 6)")
+    serve.add_argument("--metro", metavar="CITY",
+                       help="open on in-person events near a city, e.g. --metro delhi "
+                            f"(known: {', '.join(METRO_ALIASES)})")
 
     sub.add_parser("sources", help="list available sources")
     args = parser.parse_args(argv)
@@ -61,10 +66,16 @@ def main(argv: list[str] | None = None) -> int:
         print("\n".join(SOURCES))
         return 0
     if args.command == "serve":
+        query = ""
+        if args.metro:
+            metro = resolve(args.metro)
+            if metro is None:
+                parser.error(f"unknown city {args.metro!r}; known: {', '.join(METRO_ALIASES)}")
+            query = urlencode({"metro": metro, "mode": "onsite"})
         from .serve import serve as run_server
         run_server(WEB_DIR, DEFAULT_OUT, host=args.host, port=args.port,
                    open_browser=not args.no_open, max_age=timedelta(hours=args.max_age),
-                   fetch=not args.no_fetch)
+                   fetch=not args.no_fetch, start_query=query)
         return 0
     return _fetch(args, parser)
 

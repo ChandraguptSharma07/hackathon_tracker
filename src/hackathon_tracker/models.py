@@ -37,6 +37,7 @@ class Hackathon(BaseModel):
     location: str | None = None
     city: str | None = None
     country: str | None = None
+    metro: str | None = None  # e.g. "Delhi NCR", set for events with a physical part
 
     prize_amount: float | None = None
     prize_currency: str | None = None

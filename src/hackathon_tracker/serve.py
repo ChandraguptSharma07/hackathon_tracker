@@ -56,7 +56,7 @@ def _bind(host: str, port: int, handler) -> ThreadingHTTPServer:
 
 def serve(web_dir: Path, feed_path: Path, host: str = "127.0.0.1", port: int = 8000,
           open_browser: bool = True, max_age: timedelta = timedelta(hours=6),
-          fetch: bool = True) -> None:
+          fetch: bool = True, start_query: str = "") -> None:
     age = feed_age(feed_path)
     if fetch and age is None:
         print("No data yet, fetching every source (about 30 seconds)…", flush=True)
@@ -72,7 +72,7 @@ def serve(web_dir: Path, feed_path: Path, host: str = "127.0.0.1", port: int = 8
                          daemon=True).start()
 
     server = _bind(host, port, functools.partial(QuietHandler, directory=str(web_dir)))
-    url = f"http://{host}:{server.server_port}/"
+    url = f"http://{host}:{server.server_port}/" + (f"?{start_query}" if start_query else "")
     print(f"Hackathon Tracker running at {url}  (Ctrl+C to stop)", flush=True)
     if open_browser:
         threading.Timer(0.5, webbrowser.open, args=(url,)).start()

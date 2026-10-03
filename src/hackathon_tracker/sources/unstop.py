@@ -4,6 +4,8 @@ Unstop does not expose the event start date in listings, only the end and the
 registration window, so `starts_at` stays None.
 """
 
+import re
+
 import httpx
 
 from ..models import Hackathon
@@ -12,6 +14,18 @@ from ..parsing import strip_html, to_usd, to_utc
 NAME = "unstop"
 API = "https://unstop.com/api/public/opportunity/search-result"
 MAX_PAGES = 10
+
+# Unstop's "hackathons" category also holds college-fest events. Drop those unless the
+# title still says hack/-thon ("HackRobo" stays, "Robo Sumo" goes).
+FEST_EVENT = re.compile(
+    r"robo[ -]?(race|sumo|soccer|maze|wars?)|drone[ -](race|soccer)|\bbgmi\b|valorant|free ?fire"
+    r"|tournament|poster|quiz|treasure hunt|debate|business plan", re.I)
+HACK_WORD = re.compile(r"hack|thon\b", re.I)
+
+
+def is_fest_event(title: str) -> bool:
+    return bool(FEST_EVENT.search(title)) and not HACK_WORD.search(title)
+
 
 CURRENCIES = {"fa-rupee": "INR", "fa-dollar": "USD", "fa-euro": "EUR", "fa-gbp": "GBP"}
 
@@ -29,7 +43,7 @@ def _prize(prizes: list[dict]) -> tuple[float | None, str | None]:
 def parse(payload: dict) -> list[Hackathon]:
     out = []
     for o in payload.get("data", {}).get("data", []):
-        if o.get("visibility") != "public":
+        if o.get("visibility") != "public" or is_fest_event(o["title"]):
             continue
         addr = o.get("address_with_country_logo") or {}
         country = (addr.get("country") or {}).get("name")

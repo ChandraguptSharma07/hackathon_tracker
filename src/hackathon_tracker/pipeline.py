@@ -9,7 +9,7 @@ from pathlib import Path
 
 from pydantic import BaseModel
 
-from . import sponsors
+from . import places, sponsors
 from .dedupe import dedupe
 from .http import make_client
 from .models import Hackathon
@@ -98,12 +98,15 @@ def build_feed(sources: dict[str, Fetcher] | None = None, previous: Feed | None 
                 collected.extend(p.model_copy(update={"also_on": []})
                                  for p in prev_items if p.source == name)
 
+    order = {name: i for i, name in enumerate(SOURCES)}  # stable order for the site's chips
+    health = dict(sorted(health.items(), key=lambda kv: order.get(kv[0], len(order))))
+
     first_seen = {p.id: p.first_seen for p in prev_items if p.first_seen}
     for p in prev_items:  # merged records remember their secondary listings' ages too
         for listing in p.also_on:
             first_seen.setdefault(listing.url, p.first_seen)
 
-    current = [sponsors.tag(h) for h in collected if is_current(h, now)]
+    current = [places.tag(sponsors.tag(h)) for h in collected if is_current(h, now)]
     merged = dedupe(current)
     for h in merged:
         h.first_seen = first_seen.get(h.id) or first_seen.get(h.url) or now
