@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hackathon Tracker</title>
+  <meta name="description" content="Every open hackathon from Devpost, MLH, Devfolio, Unstop, HackerEarth, Cerebral Valley and lablab.ai in one place.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <h1>Hackathon Tracker</h1>
+      <p class="sub" id="summary">Loading…</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <form class="filters" id="filters" autocomplete="off" onsubmit="return false">
+      <input type="search" name="q" placeholder="Search title, organizer, theme, city…" aria-label="Search">
+      <div class="row">
+        <label>Mode
+          <select name="mode">
+            <option value="">Any</option>
+            <option value="online">Online</option>
+            <option value="in_person">In person</option>
+            <option value="hybrid">Hybrid</option>
+          </select>
+        </label>
+        <label>Sponsor
+          <select name="sponsor"><option value="">Any</option></select>
+        </label>
+        <label>Country
+          <select name="country"><option value="">Any</option></select>
+        </label>
+        <label>Deadline
+          <select name="within">
+            <option value="">Any time</option>
+            <option value="3">Next 3 days</option>
+            <option value="7">Next 7 days</option>
+            <option value="30">Next 30 days</option>
+          </select>
+        </label>
+        <label>Sort
+          <select name="sort">
+            <option value="deadline">Deadline soonest</option>
+            <option value="start">Starting soonest</option>
+            <option value="prize">Biggest prize</option>
+            <option value="new">Newest added</option>
+            <option value="popular">Most participants</option>
+          </select>
+        </label>
+      </div>
+      <div class="row toggles">
+        <label class="check"><input type="checkbox" name="prize"> Cash prize</label>
+        <label class="check"><input type="checkbox" name="fresh"> New this week</label>
+        <span class="sources" id="sources" aria-label="Sources"></span>
+        <button type="button" id="clear" class="link">Reset</button>
+      </div>
+    </form>
+
+    <p class="count" id="count" aria-live="polite"></p>
+    <ol class="list" id="list"></ol>
+    <button type="button" id="more" class="more" hidden>Show more</button>
+  </main>
+
+  <footer class="wrap foot">
+    <details>
+      <summary>Source health</summary>
+      <ul id="health"></ul>
+    </details>
+    <p>Data refreshed automatically from public listings. Prize amounts in other currencies are converted to USD at rough fixed rates.</p>
+  </footer>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>
