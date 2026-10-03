@@ -3,4 +3,4 @@ __pycache__/
 .venv/
 .pytest_cache/
 dist/
-graphify-out/cache/
+graphify-out/
