@@ -123,6 +123,7 @@ a { color: var(--accent); }
 }
 button.tag { cursor: pointer; font: inherit; font-size: 12px; }
 .tag.sponsor { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
+.tag.kind { background: var(--warn-soft); color: var(--warn); border-color: transparent; }
 .tag.new { background: var(--good-soft); color: var(--good); border-color: transparent; font-weight: 600; }
 
 .side { text-align: right; display: flex; flex-direction: column; gap: 6px; align-items: flex-end; font-size: 13px; }
@@ -140,6 +141,7 @@ button.tag { cursor: pointer; font: inherit; font-size: 12px; }
 .bad { color: var(--warn); }
 
 @media (max-width: 640px) {
+  .filters { position: static; }  /* too tall to pin on a phone */
   .card { grid-template-columns: 52px 1fr; }
   .thumb { width: 52px; height: 52px; }
   .side { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; text-align: left; align-items: center; }

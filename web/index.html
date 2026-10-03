@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Hackathon Tracker</title>
-  <meta name="description" content="Every open hackathon from Devpost, MLH, Devfolio, Unstop, HackerEarth, Cerebral Valley and lablab.ai in one place.">
+  <meta name="description" content="Every open hackathon and ML competition from Devpost, MLH, Devfolio, Unstop, ETHGlobal, DoraHacks, lu.ma, Kaggle and more in one place.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,6 +19,13 @@
     <form class="filters" id="filters" autocomplete="off" onsubmit="return false">
       <input type="search" name="q" placeholder="Search title, organizer, theme, city…" aria-label="Search">
       <div class="row">
+        <label>Type
+          <select name="kind">
+            <option value="">Any</option>
+            <option value="hackathon">Hackathons</option>
+            <option value="competition">ML competitions</option>
+          </select>
+        </label>
         <label>Mode
           <select name="mode">
             <option value="">Any</option>

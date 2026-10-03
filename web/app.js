@@ -10,6 +10,13 @@ const SOURCE_NAMES = {
   hackerearth: "HackerEarth",
   cerebralvalley: "Cerebral Valley",
   lablab: "lablab.ai",
+  ethglobal: "ETHGlobal",
+  dorahacks: "DoraHacks",
+  luma: "lu.ma",
+  hackclub: "Hack Club",
+  taikai: "TAIKAI",
+  kaggle: "Kaggle",
+  zindi: "Zindi",
 };
 const MODE_NAMES = { online: "Online", in_person: "In person", hybrid: "Hybrid" };
 
@@ -82,6 +89,7 @@ function filtered() {
   const terms = (f.q || "").toLowerCase().split(/\s+/).filter(Boolean);
   const out = all.filter((h) => {
     if (h.allSources.every((s) => disabledSources.has(s))) return false;
+    if (f.kind && (h.kind || "hackathon") !== f.kind) return false;
     if (f.mode && h.mode !== f.mode) return false;
     if (f.sponsor && !(h.sponsors || []).includes(f.sponsor)) return false;
     if (f.country && h.countryName !== f.country) return false;
@@ -154,6 +162,7 @@ function card(h, idx) {
       </p>
       <div class="tags">
         ${h.isNew(3) ? `<span class="tag new">New</span>` : ""}
+        ${h.kind === "competition" ? `<span class="tag kind">ML competition</span>` : ""}
         ${(h.sponsors || []).map((s) => `<button type="button" class="tag sponsor" data-sponsor="${esc(s)}">${esc(s)}</button>`).join("")}
         ${(h.themes || []).slice(0, 4).map((t) => `<span class="tag">${esc(t)}</span>`).join("")}
       </div>
@@ -172,7 +181,7 @@ let current = [];
 function render() {
   writeState();
   current = filtered();
-  $("#count").textContent = `${current.length} of ${all.length} hackathons`;
+  $("#count").textContent = `${current.length} of ${all.length} listings`;
   $("#list").innerHTML = current.slice(0, shown).map(card).join("");
   $("#more").hidden = current.length <= shown;
 }
@@ -283,7 +292,7 @@ async function main() {
   health(feed);
   const updated = new Date(feed.generated_at);
   $("#summary").textContent =
-    `${all.length} open and upcoming hackathons from ${Object.keys(feed.sources).length} sites · updated ${updated.toLocaleString()}`;
+    `${all.length} open and upcoming hackathons and competitions from ${Object.keys(feed.sources).length} sites · updated ${updated.toLocaleString()}`;
   render();
 }
 
