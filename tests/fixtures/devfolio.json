@@ -1,0 +1,350 @@
+{
+ "hits": {
+  "total": {
+   "value": 20
+  },
+  "hits": [
+   {
+    "_source": {
+     "country": "India",
+     "devfolio_official": null,
+     "featured": null,
+     "private": false,
+     "starts_at": "2026-10-05T14:30:00+00:00",
+     "hosted_by": null,
+     "hashtags": [],
+     "apply_mode": "both",
+     "city": "Navi Mumbai",
+     "timezone": "Asia/Kolkata",
+     "rating": 0,
+     "type": "HACKATHON",
+     "uuid": "0204a886396a4f5b91f45a99a5209499",
+     "sponsor_tiers": [],
+     "themes": [],
+     "hackathon_setting": {
+      "winner_announce_at": null,
+      "reg_starts_at": "2026-09-29T21:00:00+00:00",
+      "winner_announced": false,
+      "women_only": false,
+      "reg_ends_at": "2026-10-04T18:29:00+00:00",
+      "facebook": null,
+      "telegram": null,
+      "medium": null,
+      "instagram": null,
+      "linkedin": null,
+      "external_apply_url": null,
+      "primary_color": "#abb8c3",
+      "uuid": "8a70cd776ac244948a9274080ca2f1f8",
+      "contact_email": "nehapatil72007@gmail.com",
+      "twitter": null,
+      "site": "https://spacetech-sigce.vercel.app/",
+      "discord": null,
+      "review": false,
+      "slack": null,
+      "logo": "https://assets.devfolio.co/hackathons/0204a886396a4f5b91f45a99a5209499/assets/logo/23.png",
+      "subdomain": "hackverse-19",
+      "farcaster": null
+     },
+     "ends_at": "2026-10-06T14:30:00+00:00",
+     "is_online": false,
+     "state": "Maharashtra",
+     "slug": "hackverse-19",
+     "team_min": 2,
+     "themed": false,
+     "discover": false,
+     "participants_count": 196,
+     "hackathon_faqs": [],
+     "participants_details": [],
+     "team_size": 4,
+     "verified": true,
+     "prizes": [
+      {
+       "parent_prize_uuid": null,
+       "name": "Hackverse 2026",
+       "is_sponsor_prize": false,
+       "uuid": "cd6ba589c7634c3082b058321f74776a",
+       "desc": ""
+      }
+     ],
+     "projects_submitted": 0,
+     "name": "Hackverse.2026",
+     "tagline": null,
+     "location": "Navi Mumbai, Maharashtra, India",
+     "judges": [],
+     "cover_img": "https://assets.devfolio.co/hackathons/0204a886396a4f5b91f45a99a5209499/assets/cover/693.png",
+     "desc": "Build Beyond Earth. Innovate Beyond Limits. 🚀\n\nTECHFEST 2026–27 is a 24-hour Space Technology Hackathon where innovators, developers, and problem-solvers come together to build solutions for the future of space technology.\n\nExplore challenges across AI/ML, Cybersecurity, Data, Satellite Systems, IoT, Robotics, Earth Observation, Communication, and more.\n\n🛰️ 5–6 October 2026\n📍 Smt. Indira Gandhi College of Engineering, Navi Mumbai\n🏆 ₹35,000 Prize Pool\n⚡ 2 Rounds | Online PPT Submission → Offline 24-Hour Hackathon\n\nThe mission starts with an idea. Build it. Test it. Take it beyond. 🌌\n\nhttps://chat.whatsapp.com/CCseWSQj2QQGqFKIcmkOet",
+     "status": "publish",
+     "user_hackathon": null,
+     "user_hackathon_reminder": null
+    }
+   },
+   {
+    "_source": {
+     "country": "India",
+     "devfolio_official": null,
+     "featured": null,
+     "private": false,
+     "starts_at": "2026-10-10T12:30:00+00:00",
+     "hosted_by": null,
+     "hashtags": [],
+     "apply_mode": "both",
+     "city": "Mangalagiri",
+     "timezone": "Asia/Calcutta",
+     "rating": 0,
+     "type": "HACKATHON",
+     "uuid": "319da9ca8a8944bb9fd22da3cc363c4c",
+     "sponsor_tiers": [
+      {
+       "sponsors": [
+        {
+         "name": "Major League Hacking",
+         "about": null,
+         "logo": "https://assets.devfolio.co/hackathons/319da9ca8a8944bb9fd22da3cc363c4c/sponsors/d0d87ba5ed274cde99f58483cc427e6f/843.png",
+         "company": {
+          "domain": "mlh.io",
+          "name": "Major League Hacking",
+          "verified": false,
+          "logo": "https://api.devfolio.co/api/miscellaneous/logo/mlh.io.png",
+          "uuid": "aba01ea80cbd4a5e983ffdf014955bf5"
+         },
+         "position": 1,
+         "uuid": "d0d87ba5ed274cde99f58483cc427e6f"
+        }
+       ],
+       "name": null,
+       "width": 400,
+       "about": "",
+       "position": 1,
+       "uuid": "4e4cac2c72ea47578b1a6b866c456605",
+       "height": null
+      }
+     ],
+     "themes": [],
+     "hackathon_setting": {
+      "winner_announce_at": null,
+      "reg_starts_at": "2026-09-19T18:30:00+00:00",
+      "winner_announced": false,
+      "women_only": false,
+      "reg_ends_at": "2026-10-05T18:29:00+00:00",
+      "facebook": null,
+      "telegram": null,
+      "medium": null,
+      "instagram": "https://www.instagram.com/foss.srmap/",
+      "linkedin": "https://www.linkedin.com/company/foss-srmap/",
+      "external_apply_url": null,
+      "primary_color": "#00d084",
+      "uuid": "e87bf20759ff4f27aa911097e0244e77",
+      "contact_email": "ramratanpadhy59@gmail.com",
+      "twitter": null,
+      "site": null,
+      "discord": "https://discord.com/invite/Q5Zeg5Wx7d",
+      "review": false,
+      "slack": null,
+      "logo": "https://assets.devfolio.co/hackathons/319da9ca8a8944bb9fd22da3cc363c4c/assets/logo/404.png",
+      "subdomain": "sudo-hacktober",
+      "farcaster": null
+     },
+     "ends_at": "2026-10-11T03:30:00+00:00",
+     "is_online": false,
+     "state": "Andhra Pradesh",
+     "slug": "sudo-hacktober",
+     "team_min": 1,
+     "themed": false,
+     "discover": false,
+     "participants_count": 71,
+     "hackathon_faqs": [],
+     "participants_details": [],
+     "team_size": 1,
+     "verified": true,
+     "prizes": [],
+     "projects_submitted": 0,
+     "name": "sudo Hacktober",
+     "tagline": null,
+     "location": "SRM University AP, Mangalagiri Neerukonda Tadikonda Road, mandal, Mangalagiri, Andhra Pradesh, India",
+     "judges": [],
+     "cover_img": "https://assets.devfolio.co/hackathons/319da9ca8a8944bb9fd22da3cc363c4c/assets/cover/612.png",
+     "desc": "FOSS SRM AP brings to you: MLH HACKTOBER FEST!!\nGet ready for the best hackathon of the year, organized by Next Tech Lab and FOSS. 12 hours of pure open-source building, late-night debugging, and shipping code. Work alongside top builders on campus, tackle real repositories, and claim official MLH and Hacktoberfest swag while fueled by constant caffeine and solid food. Bring your laptop and get ready to push commits all event long. Register now!!",
+     "status": "publish",
+     "user_hackathon": null,
+     "user_hackathon_reminder": null
+    }
+   },
+   {
+    "_source": {
+     "country": "India",
+     "devfolio_official": null,
+     "featured": null,
+     "private": false,
+     "starts_at": "2026-10-30T03:30:00+00:00",
+     "hosted_by": null,
+     "hashtags": [],
+     "apply_mode": "both",
+     "city": "Bengaluru",
+     "timezone": "Asia/Calcutta",
+     "rating": 0,
+     "type": "HACKATHON",
+     "uuid": "dbf09d9a260c41fdac9dabfbf738008f",
+     "sponsor_tiers": [
+      {
+       "sponsors": [
+        {
+         "name": "IBM",
+         "about": null,
+         "logo": "https://assets.devfolio.co/hackathons/dbf09d9a260c41fdac9dabfbf738008f/sponsors/413d32e32a904789a9157d0b77f3a1f0/742.png",
+         "company": {
+          "domain": "ibm.com",
+          "name": "IBM",
+          "verified": false,
+          "logo": null,
+          "uuid": "bb458be6063b45f7a9a05b21051bd2fc"
+         },
+         "position": 1,
+         "uuid": "413d32e32a904789a9157d0b77f3a1f0"
+        },
+        {
+         "name": "Ramaiah Institute of Technology",
+         "about": null,
+         "logo": "https://assets.devfolio.co/hackathons/dbf09d9a260c41fdac9dabfbf738008f/sponsors/27491a8dde5e4e4aa6c8d1ccc3b315de/814.png",
+         "company": {
+          "domain": "msrit.edu",
+          "name": "National Service Scheme",
+          "verified": false,
+          "logo": null,
+          "uuid": "b7576a649d0449a793a77906f407877b"
+         },
+         "position": 3,
+         "uuid": "27491a8dde5e4e4aa6c8d1ccc3b315de"
+        },
+        {
+         "name": "QuantumRIT",
+         "about": null,
+         "logo": "https://assets.devfolio.co/hackathons/dbf09d9a260c41fdac9dabfbf738008f/sponsors/3dd4deba2c884005b8bad0737f0ed897/824.png",
+         "company": {
+          "domain": "https://www.linkedin.com/company/quantumcluster-rit-bengaluru/",
+          "name": "QuantumRIT",
+          "verified": false,
+          "logo": null,
+          "uuid": "f3c13f97483a411d9249075963fcf7c6"
+         },
+         "position": 2,
+         "uuid": "3dd4deba2c884005b8bad0737f0ed897"
+        },
+        {
+         "name": "IEEE Computer Society",
+         "about": null,
+         "logo": "https://assets.devfolio.co/hackathons/dbf09d9a260c41fdac9dabfbf738008f/sponsors/f561d4cb0a304c04a3892256a8ef4994/949.png",
+         "company": {
+          "domain": "computer.org",
+          "name": "IEEE Computer Society",
+          "verified": false,
+          "logo": null,
+          "uuid": "b286b7a9442841178a19c3e79677f89a"
+         },
+         "position": 4,
+         "uuid": "f561d4cb0a304c04a3892256a8ef4994"
+        },
+        {
+         "name": "Heapify Global Community",
+         "about": null,
+         "logo": "https://assets.devfolio.co/hackathons/dbf09d9a260c41fdac9dabfbf738008f/sponsors/678e445d6e584971b49f9a16c654de46/230.jpeg",
+         "company": {
+          "domain": "https://www.linkedin.com/company/heapify-global-community/",
+          "name": "Heapify Global Community",
+          "verified": false,
+          "logo": null,
+          "uuid": "0673ad4f9887442185144695a5c46c5f"
+         },
+         "position": 5,
+         "uuid": "678e445d6e584971b49f9a16c654de46"
+        }
+       ],
+       "name": null,
+       "width": 200,
+       "about": "",
+       "position": 1,
+       "uuid": "f5628ce8734c498ba5f4b42ed74a98aa",
+       "height": null
+      }
+     ],
+     "themes": [],
+     "hackathon_setting": {
+      "winner_announce_at": null,
+      "reg_starts_at": "2026-09-25T08:30:00+00:00",
+      "winner_announced": false,
+      "women_only": false,
+      "reg_ends_at": "2026-10-07T18:29:00+00:00",
+      "facebook": null,
+      "telegram": null,
+      "medium": null,
+      "instagram": "https://www.instagram.com/quantum_msrit/",
+      "linkedin": "https://www.linkedin.com/company/quantumcluster-rit-bengaluru/posts/?feedView=all",
+      "external_apply_url": null,
+      "primary_color": "#7c3aed",
+      "uuid": "0302b66fd7b944c8909ad7e971967b5f",
+      "contact_email": "quantumrit@msrit.edu",
+      "twitter": "https://x.com/quantumrit",
+      "site": "https://www.quantumweek.tech/hackathon",
+      "discord": null,
+      "review": false,
+      "slack": null,
+      "logo": "https://assets.devfolio.co/hackathons/dbf09d9a260c41fdac9dabfbf738008f/assets/logo/955.png",
+      "subdomain": "qhack-india",
+      "farcaster": null
+     },
+     "ends_at": "2026-10-31T14:30:00+00:00",
+     "is_online": false,
+     "state": "Karnataka",
+     "slug": "qhack-india",
+     "team_min": 3,
+     "themed": false,
+     "discover": false,
+     "participants_count": 465,
+     "hackathon_faqs": [],
+     "participants_details": [],
+     "team_size": 4,
+     "verified": true,
+     "prizes": [
+      {
+       "parent_prize_uuid": null,
+       "name": "Q-Hack India Champion",
+       "is_sponsor_prize": false,
+       "uuid": "c7e9037874f8405cb8382c2f03e3bac1",
+       "desc": ""
+      },
+      {
+       "parent_prize_uuid": null,
+       "name": "Q-Hack India Runner-Up",
+       "is_sponsor_prize": false,
+       "uuid": "4962a9cda6cd4a41b7872fd8d83c2db5",
+       "desc": ""
+      },
+      {
+       "parent_prize_uuid": null,
+       "name": "Quantum Innovation Award",
+       "is_sponsor_prize": false,
+       "uuid": "cdaf882a890743c0b74bf202236b29ed",
+       "desc": ""
+      },
+      {
+       "parent_prize_uuid": null,
+       "name": "Quantum Impact Award",
+       "is_sponsor_prize": false,
+       "uuid": "318de25e153f4cb0b7d3a1885b502453",
+       "desc": ""
+      }
+     ],
+     "projects_submitted": 0,
+     "name": "Q-HACK INDIA 2026",
+     "tagline": "The Quantum Build Challenge",
+     "location": "Ramaiah Institute of Technology, MSRIT Post, M S R Nagar, Mathikere, Bengaluru, Karnataka, India",
+     "judges": [],
+     "cover_img": "https://assets.devfolio.co/hackathons/dbf09d9a260c41fdac9dabfbf738008f/assets/cover/814.png",
+     "desc": "**Q-Hack India 2026** is a national-level quantum hackathon hosted by QuantumRIT at Ramaiah Institute of Technology, Bengaluru, as part of [Quantum Week](https://www.quantumweek.tech/) 2026, a IBM Qiskit Fall Fest program.\n\nThe hackathon brings together students, developers, researchers and quantum enthusiasts to explore real-world applications of quantum computing. Participants will move from idea to prototype through a competitive build experience, with access to mentorship, technical resources and a platform to showcase their work.\n\nWhether you are new to quantum computing or an expert, the challenge is designed to encourage experimentation, practical problem-solving and ambitious ideas.\n\n**Hackathon at a Glance**\n**Format:** 2 Rounds + Grand Finale\n**Team Size:** 3–4 members \n**Eligibility:** Undergraduate & Postgraduate Students\n**Location:** Online + In-person Finale at Ramaiah Institute of Technology, Bengaluru\n\n**Round 1 —** Idea & Prototype Submission 27 Sep – 7 Oct 2026\n**Round 2 —** Enhancement Sprint 10 – 29 Oct 2026\n**Grand Finale:** 30–31 Oct 2026 \n\n\n**Tracks**\nQuantum Biotech & Chemistry\nQuantum Security & Cryptography\nQuantum AI & Software\nOpen Quantum Innovation\n\nPPT Template for Hackathon:\n[PPT TEMPLATE\n](https://canva.link/b51hvxu95kmz95f)\nNote- Make a copy of the template before editing.\n\n**Important**\n* Solo participation is not permitted. Teams must consist of 3–4 members.\n* All team members must register individually on Devfolio.\n* Teams must be formed on Devfolio before submitting their Round 1 project.\n* Only the Team Lead should submit the Round 1 project submission form on behalf of the team.\n* The Round 1 submission must include the required idea ppt, Demo Video, Minimal Prototype, and GitHub Repository.\n\nSubmit your team's project here:\n[ROUND 1 PROJECT SUBMISSION](https://www.quantumweek.tech/hackathon/submission)\n\n**Deadline:** 7 October 2026, 11:59 PM IST\n\n**Results & Further Updates**\n\nRound 1 results will be announced on 10 October 2026.\nThe Top 30 teams shortlisted from Round 1 will participate in the Round 2 Enhancement Sprint and subsequently attend the Grand Finale at Ramaiah Institute of Technology on 30–31 October 2026.",
+     "status": "publish",
+     "user_hackathon": null,
+     "user_hackathon_reminder": null
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,1251 @@
+{
+ "data": {
+  "current_page": 1,
+  "data": [
+   {
+    "id": 1764668,
+    "public_url": "hackathons/autopilot-shunya-2026-netaji-subhas-university-of-technology-nsut-delhi-1764668",
+    "title": "AutoPilot",
+    "organization_id": 967,
+    "type": "hackathons",
+    "subtype": "online_coding_challenge",
+    "regn_open": 1,
+    "updated_at": "2026-10-03T15:08:10+05:30",
+    "region": "offline",
+    "visibility": "public",
+    "details": "<p><strong>Autopilot:</strong></p>\n<p><strong>Build an Agent. Give It a Mission. Let It Take Over.</strong></p>\n<p><strong>17 October 2026 | NSUT, Delhi | 6 Hours</strong></p>\n<p>Welcome to <strong>AutoPilot</strong>, a 6-hour Agenthon where you don't just build an AI application. You build an <strong>AI agent that has to actually get things done.</strong></p>\n<p>On the day of the event, every team will receive a task. You won't know exactly what you're building until the challenge begins.</p>\n<",
+    "short_id": "KYGo8U5",
+    "logoUrl2": "https://d8it4huxumps7.cloudfront.net/uploads/images/150x150/uploadedManual-6ac11e7fc965a_autopilot_logo_1.jpg",
+    "organisation": {
+     "id": 967,
+     "name": "Netaji Subhas University of Technology (NSUT), Delhi",
+     "public_url": "c/netaji-subhas-university-of-technology-nsut-delhi-placement-interview-competitions-articles-videos-967",
+     "logoUrl": "https://d8it4huxumps7.cloudfront.net/images/partners/partners75/5ea43063f26a3_220px-Netaji_Subhas_University_of_Technology.svg.png",
+     "logoUrl2": "https://d8it4huxumps7.cloudfront.net/images/partners/partners125/5ea43063f26a3_220px-Netaji_Subhas_University_of_Technology.svg.png",
+     "show_evaluator_login_link": false,
+     "official_email_domains": "@nsut.ac.in",
+     "tier": 1
+    },
+    "seo_url": "https://unstop.com/hackathons/autopilot-shunya-2026-netaji-subhas-university-of-technology-nsut-delhi-1764668",
+    "status": "LIVE",
+    "tags": [],
+    "thumb": null,
+    "isPaid": false,
+    "festival": {
+     "id": 520805,
+     "name": "Shunya 2026",
+     "abbr": null,
+     "organization_id": 967,
+     "organisation": {
+      "id": 967,
+      "name": "Netaji Subhas University of Technology (NSUT), Delhi",
+      "logo": "5ea43063f26a3_220px-Netaji_Subhas_University_of_Technology.svg.png"
+     },
+     "start_date": "2026-10-16 10:00:31+05:30",
+     "end_date": "2026-10-18 18:00:31+05:30",
+     "theme_colour": "blue",
+     "header_type": 0,
+     "footer_type": 0,
+     "public_url": "college-fests/shunya-2026-netaji-subhas-university-of-technology-nsut-delhi-520805",
+     "logoUrl2": "https://d8it4huxumps7.cloudfront.net/uploads/images/festival/logo/150x150/6abf6862a9fd6_shunya_logo_1.jpg",
+     "regnRequirements": {
+      "id": 2496224,
+      "opportunity_id": null,
+      "festival_id": 520805,
+      "max_team_size": null,
+      "min_team_size": null,
+      "start_regn_dt": "2026-10-01T23:15:31+05:30",
+      "end_regn_dt": "2026-10-08T23:15:31+05:30",
+      "show_deadline": 1,
+      "open_for": 0,
+      "college_type": 0,
+      "same_organisation": 1,
+      "study_year_filter": 0,
+      "deleted_at": null,
+      "enable_payment": 0,
+      "reg_amount": null,
+      "payment_for": 0,
+      "service_charge_from": 0,
+      "allow_coupons": 0,
+      "eligibility": null,
+      "payout_data": null,
+      "gender": [
+       "A"
+      ],
+      "vendor_id": null,
+      "verified_email": 1,
+      "verified_mobile": 1,
+      "experience": null,
+      "only_official_domains": null,
+      "enable_verifications": null,
+      "enable_icsfile": null,
+      "proctoring": {
+       "face": false
+      },
+      "gender_diversity": null,
+      "allow_social_login": 1,
+      "allowed_countries": null,
+      "extendedFormData": null,
+      "extendRegForm": null,
+      "screening_round": null,
+      "consent_needed": 0,
+      "invitations_allowed": 0,
+      "registration_limit": null,
+      "same_graduation_year": 0,
+      "same_course": 0,
+      "same_user_type": 0,
+      "can_edit_extended_form": 0,
+      "extend_basic_form": null,
+      "core_req_fields": null,
+      "enable_draft_reg": false,
+      "closed_job_end_date": 0,
+      "reg_restricted": 0,
+      "free_webinar_for_unstop_pro": 0,
+      "email_reply_to": 0,
+      "verified_aadhaar": 0,
+      "verified_aadhaar_face": 0,
+      "player_extended_form": null,
+      "unique_face_verify": false,
+      "resume_parser": 0,
+      "display_compatibility_score": null,
+      "registration_config": {
+       "enable_newsletter_subscription": 0
+      },
+      "verified_driving_licence_face": 0,
+      "verified_aadhaar_face_via_digilocker": 0,
+      "audio_capture": 0,
+      "verification_service": 2,
+      "driver_for_proctoring": "aws",
+      "digilocker_verification_service": 1,
+      "allow_specific_cities": false,
+      "enable_data_transfer_to_SAP": 0,
+      "resume_match_config": "[{\"key\": \"work_experience\", \"label\": \"Work Experience\", \"include\": true, \"is_custom\": false, \"weightage\": 17, \"weight_level\": 1}, {\"key\": \"skills\", \"label\": \"Skills\", \"include\": true, \"is_custom\": false, \"weightage\": 17, \"weight_level\": 1}, {\"key\": \"education\", \"label\": \"Education\", \"include\": true, \"is_custom\": false, \"weightage\": 17, \"weight_level\": 1}, {\"key\": \"achievements\", \"label\": \"Achievements\", \"include\": true, \"is_custom\": false, \"weightage\": 17, \"weight_level\": 1}, {\"key\": \"certifications\", \"label\": \"Certifications\", \"include\": true, \"is_custom\": false, \"weightage\": 16, \"weight_level\": 1}, {\"key\": \"projects\", \"label\": \"Projects\", \"include\": true, \"is_custom\": false, \"weightage\": 16, \"weight_level\": 1}]",
+      "limit_type": 1,
+      "work_location_type": "city",
+      "gender_verification": false,
+      "sap_stage_id": null,
+      "has_compatibility_priority": 0,
+      "face_recog_driver": "aws",
+      "face_detect_driver": "aws",
+      "linkedin_verification_requirement": "NONE",
+      "reg_status": "STARTED",
+      "remainingDaysArray": {
+       "durations": 4,
+       "text": " days left"
+      },
+      "remain_days": "4 days left",
+      "remaining_time": 423196
+     },
+     "regn_open": 0
+    },
+    "prizes": [
+     {
+      "id": 3859782,
+      "rank": "Winner",
+      "cash": 60000,
+      "currency": "fa-rupee",
+      "certificate": 1,
+      "entity_id": 1764668,
+      "entity_type": "App\\Model\\Opportunity",
+      "others": "",
+      "currencyCode": null,
+      "cash_postfix": null,
+      "max_cash": null,
+      "pre_placement_internship": 0,
+      "pre_placement_opportunity": 0
+     },
+     {
+      "id": 3859783,
+      "rank": "First Runner Up",
+      "cash": 30000,
+      "currency": "fa-rupee",
+      "certificate": 1,
+      "entity_id": 1764668,
+      "entity_type": "App\\Model\\Opportunity",
+      "others": "",
+      "currencyCode": null,
+      "cash_postfix": null,
+      "max_cash": null,
+      "pre_placement_internship": 0,
+      "pre_placement_opportunity": 0
+     },
+     {
+      "id": 3859784,
+      "rank": "Second Runner Up",
+      "cash": 10000,
+      "currency": "fa-rupee",
+      "certificate": 1,
+      "entity_id": 1764668,
+      "entity_type": "App\\Model\\Opportunity",
+      "others": "",
+      "currencyCode": null,
+      "cash_postfix": null,
+      "max_cash": null,
+      "pre_placement_internship": 0,
+      "pre_placement_opportunity": 0
+     }
+    ],
+    "address_with_country_logo": {
+     "id": 1858071,
+     "address": "Netaji Subhas University Of Technology",
+     "city": "West Delhi",
+     "state": "Delhi",
+     "country": {
+      "id": 94,
+      "name": "India",
+      "alpha_2": "in",
+      "alpha_3": "ind",
+      "iso": "IN",
+      "iso3": "IND",
+      "numcode": 356,
+      "phonecode": "+91   ",
+      "logos": {
+       "very_small": "https://d8it4huxumps7.cloudfront.net/images/flags/16x16/in.png",
+       "small": "https://d8it4huxumps7.cloudfront.net/images/flags/24x24/in.png",
+       "medium": "https://d8it4huxumps7.cloudfront.net/images/flags/32x32/in.png",
+       "large": "https://d8it4huxumps7.cloudfront.net/images/flags/48x48/in.png",
+       "xlarge": "https://d8it4huxumps7.cloudfront.net/images/flags/64x64/in.png",
+       "xxlarge": "https://d8it4huxumps7.cloudfront.net/images/flags/128x128/in.png"
+      }
+     },
+     "zip": null,
+     "lat": null,
+     "lng": null,
+     "addressable_id": 1764668,
+     "addressable_type": "App\\Model\\Opportunity",
+     "created_at": "2026-10-02T08:05:56+05:30",
+     "updated_at": "2026-10-03T20:55:59+05:30",
+     "deleted_at": null,
+     "address_title": "event_location",
+     "city_id": 134404,
+     "sort_order": 1,
+     "state_code": null,
+     "country_code": null
+    },
+    "short_url": "https://unstop.com/o/KYGo8U5",
+    "workfunction": [
+     {
+      "id": 2176,
+      "name": "Agentic AI Engineer",
+      "description": "",
+      "created_at": "2026-02-06T23:31:46+05:30",
+      "updated_at": "2026-02-06T23:31:46+05:30",
+      "work_function_name": null,
+      "batch_id": 11,
+      "pivot": {
+       "entity_id": 1764668,
+       "subject_id": 2176,
+       "id": 6400861,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 2014,
+      "name": "Quizzes & Treasure Hunt",
+      "description": "",
+      "created_at": "2026-02-06T23:31:46+05:30",
+      "updated_at": "2026-02-06T23:31:46+05:30",
+      "work_function_name": null,
+      "batch_id": 11,
+      "pivot": {
+       "entity_id": 1764668,
+       "subject_id": 2014,
+       "id": 6400862,
+       "ai_generated": true
+      }
+     }
+    ],
+    "assignedTag": {
+     "tag": null
+    },
+    "opportunity_config": {
+     "id": 1459464,
+     "opportunity_id": 1764668,
+     "banner_config": "{\"color\":\"color-bg4\",\"text\":\"AutoPilot\",\"type\":4,\"banner_data\":[3]}",
+     "show_registrations_count": 1,
+     "show_impressions": 1,
+     "show_team_size": 1,
+     "show_region": 1
+    },
+    "payment_services": [],
+    "filters": [
+     {
+      "id": 422,
+      "name": "Engineering Students",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": "engineering",
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/engineering.svg"
+     },
+     {
+      "id": 424,
+      "name": "Postgraduate",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": "postgraduate",
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/postgraduate.svg"
+     },
+     {
+      "id": 426,
+      "name": "Undergraduate",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": "undergraduate",
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/undergraduate.svg"
+     },
+     {
+      "id": 4022,
+      "name": "Management",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": null,
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/.svg"
+     },
+     {
+      "id": 4023,
+      "name": "Medical",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": null,
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/.svg"
+     },
+     {
+      "id": 4024,
+      "name": "Law",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": null,
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/.svg"
+     },
+     {
+      "id": 4025,
+      "name": "Arts, Commerce, Sciences & Others",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": null,
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/.svg"
+     }
+    ],
+    "required_skills": [
+     {
+      "id": 645580,
+      "skill": "Artificial Intelligence (AI)",
+      "skill_name": "Artificial Intelligence (AI)",
+      "pivot": {
+       "entity_id": 1764668,
+       "subject_id": 645580,
+       "id": 6400856,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 643296,
+      "skill": "Autonomous Systems",
+      "skill_name": "Autonomous Systems",
+      "pivot": {
+       "entity_id": 1764668,
+       "subject_id": 643296,
+       "id": 6400857,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 645963,
+      "skill": "Decision Making",
+      "skill_name": "Decision Making",
+      "pivot": {
+       "entity_id": 1764668,
+       "subject_id": 645963,
+       "id": 6400858,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 1373,
+      "skill": "Problem Solving",
+      "skill_name": "Problem Solving",
+      "pivot": {
+       "entity_id": 1764668,
+       "subject_id": 1373,
+       "id": 6400859,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 647478,
+      "skill": "System Testing",
+      "skill_name": "System Testing",
+      "pivot": {
+       "entity_id": 1764668,
+       "subject_id": 647478,
+       "id": 6400860,
+       "ai_generated": true
+      }
+     }
+    ],
+    "locations": [],
+    "end_date": "2026-10-16T00:00:00+05:30",
+    "approved_date": "2026-10-03 15:08:10 GMT+0530",
+    "viewsCount": 1,
+    "registerCount": 27,
+    "regnRequirements": {
+     "opportunity_id": 1764668,
+     "start_regn_dt": "2026-10-02T00:00:00+05:30",
+     "end_regn_dt": "2026-10-16T00:00:00+05:30",
+     "show_deadline": 1,
+     "min_team_size": 1,
+     "max_team_size": 3,
+     "work_location_type": "city",
+     "eligibility": "{\"sector\":[\"students\"],\"engineering\":[],\"bSchools\":[],\"arts\":[],\"medicine\":[],\"law\":[],\"others\":[\"all\"],\"experience\":[\"all\"],\"studentPassoutYearsSelected\":[\"all\"],\"fresherPassoutYearsSelected\":[\"all\"],\"schoolFilteredClasses\":[\"all\"],\"minMarks\":{\"high_school_perc\":0,\"high_school_cgpa\":0},\"locations\":[],\"location_type\":\"all\",\"professionalEligibility\":null,\"fresherEligibility\":null}",
+     "reg_status": "STARTED",
+     "remainingDaysArray": {
+      "durations": 11,
+      "text": " days left"
+     },
+     "remain_days": "11 days left",
+     "remaining_time": 1030666
+    }
+   },
+   {
+    "id": 1764669,
+    "public_url": "hackathons/zero-day-apocalypse-shunya-2026-netaji-subhas-university-of-technology-nsut-delhi-1764669",
+    "title": "Zero Day Apocalypse",
+    "organization_id": 967,
+    "type": "hackathons",
+    "subtype": "online_coding_challenge",
+    "regn_open": 1,
+    "updated_at": "2026-10-03T15:08:04+05:30",
+    "region": "offline",
+    "visibility": "public",
+    "details": "<p><strong>Zero Day Apocalypse:</strong></p>\n<p><strong>How Far Can You Push an AI?</strong></p>\n<p>What happens when an AI is told <strong>not</strong> to do something?</p>\n<p>Your job is to make it do exactly that.</p>\n<p>Welcome to <strong>Zero Day Apocalypse</strong>, a 4-hour AI challenge where your biggest weapon isn't your code. It's your ability to <strong>talk to an AI in ways it wasn't expecting</strong>.</p>\n<p>We've built an entire platform for the event, filled with multiple levels,",
+    "short_id": "d6xh2wC",
+    "logoUrl2": "https://d8it4huxumps7.cloudfront.net/uploads/images/150x150/uploadedManual-6ac11df87eea4_zeroday_logo_1.jpg",
+    "organisation": {
+     "id": 967,
+     "name": "Netaji Subhas University of Technology (NSUT), Delhi",
+     "public_url": "c/netaji-subhas-university-of-technology-nsut-delhi-placement-interview-competitions-articles-videos-967",
+     "logoUrl": "https://d8it4huxumps7.cloudfront.net/images/partners/partners75/5ea43063f26a3_220px-Netaji_Subhas_University_of_Technology.svg.png",
+     "logoUrl2": "https://d8it4huxumps7.cloudfront.net/images/partners/partners125/5ea43063f26a3_220px-Netaji_Subhas_University_of_Technology.svg.png",
+     "show_evaluator_login_link": false,
+     "official_email_domains": "@nsut.ac.in",
+     "tier": 1
+    },
+    "seo_url": "https://unstop.com/hackathons/zero-day-apocalypse-shunya-2026-netaji-subhas-university-of-technology-nsut-delhi-1764669",
+    "status": "LIVE",
+    "tags": [],
+    "thumb": null,
+    "isPaid": false,
+    "festival": {
+     "id": 520805,
+     "name": "Shunya 2026",
+     "abbr": null,
+     "organization_id": 967,
+     "organisation": {
+      "id": 967,
+      "name": "Netaji Subhas University of Technology (NSUT), Delhi",
+      "logo": "5ea43063f26a3_220px-Netaji_Subhas_University_of_Technology.svg.png"
+     },
+     "start_date": "2026-10-16 10:00:31+05:30",
+     "end_date": "2026-10-18 18:00:31+05:30",
+     "theme_colour": "blue",
+     "header_type": 0,
+     "footer_type": 0,
+     "public_url": "college-fests/shunya-2026-netaji-subhas-university-of-technology-nsut-delhi-520805",
+     "logoUrl2": "https://d8it4huxumps7.cloudfront.net/uploads/images/festival/logo/150x150/6abf6862a9fd6_shunya_logo_1.jpg",
+     "regnRequirements": {
+      "id": 2496224,
+      "opportunity_id": null,
+      "festival_id": 520805,
+      "max_team_size": null,
+      "min_team_size": null,
+      "start_regn_dt": "2026-10-01T23:15:31+05:30",
+      "end_regn_dt": "2026-10-08T23:15:31+05:30",
+      "show_deadline": 1,
+      "open_for": 0,
+      "college_type": 0,
+      "same_organisation": 1,
+      "study_year_filter": 0,
+      "deleted_at": null,
+      "enable_payment": 0,
+      "reg_amount": null,
+      "payment_for": 0,
+      "service_charge_from": 0,
+      "allow_coupons": 0,
+      "eligibility": null,
+      "payout_data": null,
+      "gender": [
+       "A"
+      ],
+      "vendor_id": null,
+      "verified_email": 1,
+      "verified_mobile": 1,
+      "experience": null,
+      "only_official_domains": null,
+      "enable_verifications": null,
+      "enable_icsfile": null,
+      "proctoring": {
+       "face": false
+      },
+      "gender_diversity": null,
+      "allow_social_login": 1,
+      "allowed_countries": null,
+      "extendedFormData": null,
+      "extendRegForm": null,
+      "screening_round": null,
+      "consent_needed": 0,
+      "invitations_allowed": 0,
+      "registration_limit": null,
+      "same_graduation_year": 0,
+      "same_course": 0,
+      "same_user_type": 0,
+      "can_edit_extended_form": 0,
+      "extend_basic_form": null,
+      "core_req_fields": null,
+      "enable_draft_reg": false,
+      "closed_job_end_date": 0,
+      "reg_restricted": 0,
+      "free_webinar_for_unstop_pro": 0,
+      "email_reply_to": 0,
+      "verified_aadhaar": 0,
+      "verified_aadhaar_face": 0,
+      "player_extended_form": null,
+      "unique_face_verify": false,
+      "resume_parser": 0,
+      "display_compatibility_score": null,
+      "registration_config": {
+       "enable_newsletter_subscription": 0
+      },
+      "verified_driving_licence_face": 0,
+      "verified_aadhaar_face_via_digilocker": 0,
+      "audio_capture": 0,
+      "verification_service": 2,
+      "driver_for_proctoring": "aws",
+      "digilocker_verification_service": 1,
+      "allow_specific_cities": false,
+      "enable_data_transfer_to_SAP": 0,
+      "resume_match_config": "[{\"key\": \"work_experience\", \"label\": \"Work Experience\", \"include\": true, \"is_custom\": false, \"weightage\": 17, \"weight_level\": 1}, {\"key\": \"skills\", \"label\": \"Skills\", \"include\": true, \"is_custom\": false, \"weightage\": 17, \"weight_level\": 1}, {\"key\": \"education\", \"label\": \"Education\", \"include\": true, \"is_custom\": false, \"weightage\": 17, \"weight_level\": 1}, {\"key\": \"achievements\", \"label\": \"Achievements\", \"include\": true, \"is_custom\": false, \"weightage\": 17, \"weight_level\": 1}, {\"key\": \"certifications\", \"label\": \"Certifications\", \"include\": true, \"is_custom\": false, \"weightage\": 16, \"weight_level\": 1}, {\"key\": \"projects\", \"label\": \"Projects\", \"include\": true, \"is_custom\": false, \"weightage\": 16, \"weight_level\": 1}]",
+      "limit_type": 1,
+      "work_location_type": "city",
+      "gender_verification": false,
+      "sap_stage_id": null,
+      "has_compatibility_priority": 0,
+      "face_recog_driver": "aws",
+      "face_detect_driver": "aws",
+      "linkedin_verification_requirement": "NONE",
+      "reg_status": "STARTED",
+      "remainingDaysArray": {
+       "durations": 4,
+       "text": " days left"
+      },
+      "remain_days": "4 days left",
+      "remaining_time": 423196
+     },
+     "regn_open": 0
+    },
+    "prizes": [
+     {
+      "id": 3859785,
+      "rank": "Winner",
+      "cash": 60000,
+      "currency": "fa-rupee",
+      "certificate": 1,
+      "entity_id": 1764669,
+      "entity_type": "App\\Model\\Opportunity",
+      "others": "",
+      "currencyCode": null,
+      "cash_postfix": null,
+      "max_cash": null,
+      "pre_placement_internship": 0,
+      "pre_placement_opportunity": 0
+     },
+     {
+      "id": 3859786,
+      "rank": "First Runner Up",
+      "cash": 30000,
+      "currency": "fa-rupee",
+      "certificate": 1,
+      "entity_id": 1764669,
+      "entity_type": "App\\Model\\Opportunity",
+      "others": "",
+      "currencyCode": null,
+      "cash_postfix": null,
+      "max_cash": null,
+      "pre_placement_internship": 0,
+      "pre_placement_opportunity": 0
+     },
+     {
+      "id": 3859787,
+      "rank": "Second Runner Up",
+      "cash": 10000,
+      "currency": "fa-rupee",
+      "certificate": 1,
+      "entity_id": 1764669,
+      "entity_type": "App\\Model\\Opportunity",
+      "others": "",
+      "currencyCode": null,
+      "cash_postfix": null,
+      "max_cash": null,
+      "pre_placement_internship": 0,
+      "pre_placement_opportunity": 0
+     }
+    ],
+    "address_with_country_logo": {
+     "id": 1858072,
+     "address": "Netaji Subhas University Of Technology",
+     "city": "West Delhi",
+     "state": "Delhi",
+     "country": {
+      "id": 94,
+      "name": "India",
+      "alpha_2": "in",
+      "alpha_3": "ind",
+      "iso": "IN",
+      "iso3": "IND",
+      "numcode": 356,
+      "phonecode": "+91   ",
+      "logos": {
+       "very_small": "https://d8it4huxumps7.cloudfront.net/images/flags/16x16/in.png",
+       "small": "https://d8it4huxumps7.cloudfront.net/images/flags/24x24/in.png",
+       "medium": "https://d8it4huxumps7.cloudfront.net/images/flags/32x32/in.png",
+       "large": "https://d8it4huxumps7.cloudfront.net/images/flags/48x48/in.png",
+       "xlarge": "https://d8it4huxumps7.cloudfront.net/images/flags/64x64/in.png",
+       "xxlarge": "https://d8it4huxumps7.cloudfront.net/images/flags/128x128/in.png"
+      }
+     },
+     "zip": null,
+     "lat": null,
+     "lng": null,
+     "addressable_id": 1764669,
+     "addressable_type": "App\\Model\\Opportunity",
+     "created_at": "2026-10-02T08:18:52+05:30",
+     "updated_at": "2026-10-03T20:54:00+05:30",
+     "deleted_at": null,
+     "address_title": "event_location",
+     "city_id": 134404,
+     "sort_order": 1,
+     "state_code": null,
+     "country_code": null
+    },
+    "short_url": "https://unstop.com/o/d6xh2wC",
+    "workfunction": [
+     {
+      "id": 1908,
+      "name": "Prompt Engineering",
+      "description": "",
+      "created_at": "2026-02-06T23:31:46+05:30",
+      "updated_at": "2026-02-06T23:31:46+05:30",
+      "work_function_name": null,
+      "batch_id": 11,
+      "pivot": {
+       "entity_id": 1764669,
+       "subject_id": 1908,
+       "id": 6400849,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 2014,
+      "name": "Quizzes & Treasure Hunt",
+      "description": "",
+      "created_at": "2026-02-06T23:31:46+05:30",
+      "updated_at": "2026-02-06T23:31:46+05:30",
+      "work_function_name": null,
+      "batch_id": 11,
+      "pivot": {
+       "entity_id": 1764669,
+       "subject_id": 2014,
+       "id": 6400850,
+       "ai_generated": true
+      }
+     }
+    ],
+    "assignedTag": {
+     "tag": null
+    },
+    "opportunity_config": {
+     "id": 1459465,
+     "opportunity_id": 1764669,
+     "banner_config": "{\"color\":\"color-bg5\",\"text\":\"Zero Day Apocalypse\",\"type\":3,\"banner_data\":[14]}",
+     "show_registrations_count": 1,
+     "show_impressions": 1,
+     "show_team_size": 1,
+     "show_region": 1
+    },
+    "payment_services": [],
+    "filters": [
+     {
+      "id": 422,
+      "name": "Engineering Students",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": "engineering",
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/engineering.svg"
+     },
+     {
+      "id": 424,
+      "name": "Postgraduate",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": "postgraduate",
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/postgraduate.svg"
+     },
+     {
+      "id": 426,
+      "name": "Undergraduate",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": "undergraduate",
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/undergraduate.svg"
+     },
+     {
+      "id": 4022,
+      "name": "Management",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": null,
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/.svg"
+     },
+     {
+      "id": 4023,
+      "name": "Medical",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": null,
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/.svg"
+     },
+     {
+      "id": 4024,
+      "name": "Law",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": null,
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/.svg"
+     },
+     {
+      "id": 4025,
+      "name": "Arts, Commerce, Sciences & Others",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": null,
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/.svg"
+     }
+    ],
+    "required_skills": [
+     {
+      "id": 645879,
+      "skill": "Creative Thinking",
+      "skill_name": "Creative Thinking",
+      "pivot": {
+       "entity_id": 1764669,
+       "subject_id": 645879,
+       "id": 6400844,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 1301,
+      "skill": "Critical Thinking",
+      "skill_name": "Critical Thinking",
+      "pivot": {
+       "entity_id": 1764669,
+       "subject_id": 1301,
+       "id": 6400845,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 645580,
+      "skill": "Artificial Intelligence (AI)",
+      "skill_name": "Artificial Intelligence (AI)",
+      "pivot": {
+       "entity_id": 1764669,
+       "subject_id": 645580,
+       "id": 6400846,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 1373,
+      "skill": "Problem Solving",
+      "skill_name": "Problem Solving",
+      "pivot": {
+       "entity_id": 1764669,
+       "subject_id": 1373,
+       "id": 6400847,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 647094,
+      "skill": "Questioning Skills",
+      "skill_name": "Questioning Skills",
+      "pivot": {
+       "entity_id": 1764669,
+       "subject_id": 647094,
+       "id": 6400848,
+       "ai_generated": true
+      }
+     }
+    ],
+    "locations": [],
+    "end_date": "2026-10-16T00:00:00+05:30",
+    "approved_date": "2026-10-03 15:08:04 GMT+0530",
+    "viewsCount": 1,
+    "registerCount": 6,
+    "regnRequirements": {
+     "opportunity_id": 1764669,
+     "start_regn_dt": "2026-10-02T00:00:00+05:30",
+     "end_regn_dt": "2026-10-16T00:00:00+05:30",
+     "show_deadline": 1,
+     "min_team_size": 1,
+     "max_team_size": 3,
+     "work_location_type": "city",
+     "eligibility": "{\"sector\":[\"students\"],\"engineering\":[],\"bSchools\":[],\"arts\":[],\"medicine\":[],\"law\":[],\"others\":[\"all\"],\"experience\":[\"all\"],\"studentPassoutYearsSelected\":[\"all\"],\"fresherPassoutYearsSelected\":[\"all\"],\"schoolFilteredClasses\":[\"all\"],\"minMarks\":{\"high_school_perc\":0,\"high_school_cgpa\":0},\"locations\":[],\"location_type\":\"all\",\"professionalEligibility\":null,\"fresherEligibility\":null}",
+     "reg_status": "STARTED",
+     "remainingDaysArray": {
+      "durations": 11,
+      "text": " days left"
+     },
+     "remain_days": "11 days left",
+     "remaining_time": 1030666
+    }
+   },
+   {
+    "id": 1764596,
+    "public_url": "hackathons/devlympics-shunya-2026-netaji-subhas-university-of-technology-nsut-delhi-1764596",
+    "title": "Devlympics",
+    "organization_id": 967,
+    "type": "hackathons",
+    "subtype": "online_coding_challenge",
+    "regn_open": 1,
+    "updated_at": "2026-10-03T21:01:58+05:30",
+    "region": "offline",
+    "visibility": "public",
+    "details": "<p><strong>Devlympics:</strong></p>\n<p><strong>24 Hours. One Theme. Endless Possibilities.</strong></p>\n<p><strong>17-18 October 2026 | NSUT, Delhi</strong></p>\n<p>Devlympics is not your traditional hackathon.</p>\n<p>There are no predefined problem statements waiting for you. No weeks of preparation. No building your project beforehand and showing up with a polished prototype.</p>\n<p>You start from zero.</p>\n<p>When the clock starts, the challenge begins. A theme will be revealed, and from that ",
+    "short_id": "FzqN56l",
+    "logoUrl2": "https://d8it4huxumps7.cloudfront.net/uploads/images/150x150/uploadedManual-6ac11ee2594b5_devlympics_logo.jpg",
+    "organisation": {
+     "id": 967,
+     "name": "Netaji Subhas University of Technology (NSUT), Delhi",
+     "public_url": "c/netaji-subhas-university-of-technology-nsut-delhi-placement-interview-competitions-articles-videos-967",
+     "logoUrl": "https://d8it4huxumps7.cloudfront.net/images/partners/partners75/5ea43063f26a3_220px-Netaji_Subhas_University_of_Technology.svg.png",
+     "logoUrl2": "https://d8it4huxumps7.cloudfront.net/images/partners/partners125/5ea43063f26a3_220px-Netaji_Subhas_University_of_Technology.svg.png",
+     "show_evaluator_login_link": false,
+     "official_email_domains": "@nsut.ac.in",
+     "tier": 1
+    },
+    "seo_url": "https://unstop.com/hackathons/devlympics-shunya-2026-netaji-subhas-university-of-technology-nsut-delhi-1764596",
+    "status": "LIVE",
+    "tags": [],
+    "thumb": null,
+    "isPaid": false,
+    "festival": {
+     "id": 520805,
+     "name": "Shunya 2026",
+     "abbr": null,
+     "organization_id": 967,
+     "organisation": {
+      "id": 967,
+      "name": "Netaji Subhas University of Technology (NSUT), Delhi",
+      "logo": "5ea43063f26a3_220px-Netaji_Subhas_University_of_Technology.svg.png"
+     },
+     "start_date": "2026-10-16 10:00:31+05:30",
+     "end_date": "2026-10-18 18:00:31+05:30",
+     "theme_colour": "blue",
+     "header_type": 0,
+     "footer_type": 0,
+     "public_url": "college-fests/shunya-2026-netaji-subhas-university-of-technology-nsut-delhi-520805",
+     "logoUrl2": "https://d8it4huxumps7.cloudfront.net/uploads/images/festival/logo/150x150/6abf6862a9fd6_shunya_logo_1.jpg",
+     "regnRequirements": {
+      "id": 2496224,
+      "opportunity_id": null,
+      "festival_id": 520805,
+      "max_team_size": null,
+      "min_team_size": null,
+      "start_regn_dt": "2026-10-01T23:15:31+05:30",
+      "end_regn_dt": "2026-10-08T23:15:31+05:30",
+      "show_deadline": 1,
+      "open_for": 0,
+      "college_type": 0,
+      "same_organisation": 1,
+      "study_year_filter": 0,
+      "deleted_at": null,
+      "enable_payment": 0,
+      "reg_amount": null,
+      "payment_for": 0,
+      "service_charge_from": 0,
+      "allow_coupons": 0,
+      "eligibility": null,
+      "payout_data": null,
+      "gender": [
+       "A"
+      ],
+      "vendor_id": null,
+      "verified_email": 1,
+      "verified_mobile": 1,
+      "experience": null,
+      "only_official_domains": null,
+      "enable_verifications": null,
+      "enable_icsfile": null,
+      "proctoring": {
+       "face": false
+      },
+      "gender_diversity": null,
+      "allow_social_login": 1,
+      "allowed_countries": null,
+      "extendedFormData": null,
+      "extendRegForm": null,
+      "screening_round": null,
+      "consent_needed": 0,
+      "invitations_allowed": 0,
+      "registration_limit": null,
+      "same_graduation_year": 0,
+      "same_course": 0,
+      "same_user_type": 0,
+      "can_edit_extended_form": 0,
+      "extend_basic_form": null,
+      "core_req_fields": null,
+      "enable_draft_reg": false,
+      "closed_job_end_date": 0,
+      "reg_restricted": 0,
+      "free_webinar_for_unstop_pro": 0,
+      "email_reply_to": 0,
+      "verified_aadhaar": 0,
+      "verified_aadhaar_face": 0,
+      "player_extended_form": null,
+      "unique_face_verify": false,
+      "resume_parser": 0,
+      "display_compatibility_score": null,
+      "registration_config": {
+       "enable_newsletter_subscription": 0
+      },
+      "verified_driving_licence_face": 0,
+      "verified_aadhaar_face_via_digilocker": 0,
+      "audio_capture": 0,
+      "verification_service": 2,
+      "driver_for_proctoring": "aws",
+      "digilocker_verification_service": 1,
+      "allow_specific_cities": false,
+      "enable_data_transfer_to_SAP": 0,
+      "resume_match_config": "[{\"key\": \"work_experience\", \"label\": \"Work Experience\", \"include\": true, \"is_custom\": false, \"weightage\": 17, \"weight_level\": 1}, {\"key\": \"skills\", \"label\": \"Skills\", \"include\": true, \"is_custom\": false, \"weightage\": 17, \"weight_level\": 1}, {\"key\": \"education\", \"label\": \"Education\", \"include\": true, \"is_custom\": false, \"weightage\": 17, \"weight_level\": 1}, {\"key\": \"achievements\", \"label\": \"Achievements\", \"include\": true, \"is_custom\": false, \"weightage\": 17, \"weight_level\": 1}, {\"key\": \"certifications\", \"label\": \"Certifications\", \"include\": true, \"is_custom\": false, \"weightage\": 16, \"weight_level\": 1}, {\"key\": \"projects\", \"label\": \"Projects\", \"include\": true, \"is_custom\": false, \"weightage\": 16, \"weight_level\": 1}]",
+      "limit_type": 1,
+      "work_location_type": "city",
+      "gender_verification": false,
+      "sap_stage_id": null,
+      "has_compatibility_priority": 0,
+      "face_recog_driver": "aws",
+      "face_detect_driver": "aws",
+      "linkedin_verification_requirement": "NONE",
+      "reg_status": "STARTED",
+      "remainingDaysArray": {
+       "durations": 4,
+       "text": " days left"
+      },
+      "remain_days": "4 days left",
+      "remaining_time": 423196
+     },
+     "regn_open": 0
+    },
+    "prizes": [
+     {
+      "id": 3859779,
+      "rank": "Winner",
+      "cash": 60000,
+      "currency": "fa-rupee",
+      "certificate": 1,
+      "entity_id": 1764596,
+      "entity_type": "App\\Model\\Opportunity",
+      "others": "",
+      "currencyCode": null,
+      "cash_postfix": null,
+      "max_cash": null,
+      "pre_placement_internship": 0,
+      "pre_placement_opportunity": 0
+     },
+     {
+      "id": 3859780,
+      "rank": "First Runner Up",
+      "cash": 30000,
+      "currency": "fa-rupee",
+      "certificate": 1,
+      "entity_id": 1764596,
+      "entity_type": "App\\Model\\Opportunity",
+      "others": "",
+      "currencyCode": null,
+      "cash_postfix": null,
+      "max_cash": null,
+      "pre_placement_internship": 0,
+      "pre_placement_opportunity": 0
+     },
+     {
+      "id": 3859781,
+      "rank": "Second Runner Up",
+      "cash": 10000,
+      "currency": "fa-rupee",
+      "certificate": 1,
+      "entity_id": 1764596,
+      "entity_type": "App\\Model\\Opportunity",
+      "others": "",
+      "currencyCode": null,
+      "cash_postfix": null,
+      "max_cash": null,
+      "pre_placement_internship": 0,
+      "pre_placement_opportunity": 0
+     }
+    ],
+    "address_with_country_logo": {
+     "id": 1858070,
+     "address": "Netaji Subhas University Of Technology",
+     "city": "West Delhi",
+     "state": "Delhi",
+     "country": {
+      "id": 94,
+      "name": "India",
+      "alpha_2": "in",
+      "alpha_3": "ind",
+      "iso": "IN",
+      "iso3": "IND",
+      "numcode": 356,
+      "phonecode": "+91   ",
+      "logos": {
+       "very_small": "https://d8it4huxumps7.cloudfront.net/images/flags/16x16/in.png",
+       "small": "https://d8it4huxumps7.cloudfront.net/images/flags/24x24/in.png",
+       "medium": "https://d8it4huxumps7.cloudfront.net/images/flags/32x32/in.png",
+       "large": "https://d8it4huxumps7.cloudfront.net/images/flags/48x48/in.png",
+       "xlarge": "https://d8it4huxumps7.cloudfront.net/images/flags/64x64/in.png",
+       "xxlarge": "https://d8it4huxumps7.cloudfront.net/images/flags/128x128/in.png"
+      }
+     },
+     "zip": null,
+     "lat": null,
+     "lng": null,
+     "addressable_id": 1764596,
+     "addressable_type": "App\\Model\\Opportunity",
+     "created_at": "2026-10-02T07:45:04+05:30",
+     "updated_at": "2026-10-03T20:57:36+05:30",
+     "deleted_at": null,
+     "address_title": "event_location",
+     "city_id": 134404,
+     "sort_order": 1,
+     "state_code": null,
+     "country_code": null
+    },
+    "short_url": "https://unstop.com/o/FzqN56l",
+    "workfunction": [
+     {
+      "id": 2004,
+      "name": "Software Development",
+      "description": "",
+      "created_at": "2026-02-06T23:31:46+05:30",
+      "updated_at": "2026-02-06T23:31:46+05:30",
+      "work_function_name": null,
+      "batch_id": 11,
+      "pivot": {
+       "entity_id": 1764596,
+       "subject_id": 2004,
+       "id": 6400868,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 2014,
+      "name": "Quizzes & Treasure Hunt",
+      "description": "",
+      "created_at": "2026-02-06T23:31:46+05:30",
+      "updated_at": "2026-02-06T23:31:46+05:30",
+      "work_function_name": null,
+      "batch_id": 11,
+      "pivot": {
+       "entity_id": 1764596,
+       "subject_id": 2014,
+       "id": 6400869,
+       "ai_generated": true
+      }
+     }
+    ],
+    "assignedTag": {
+     "tag": null
+    },
+    "opportunity_config": {
+     "id": 1459463,
+     "opportunity_id": 1764596,
+     "banner_config": "{\"color\":\"color-bg8\",\"text\":\"Devlympics\",\"type\":6,\"banner_data\":[7]}",
+     "show_registrations_count": 1,
+     "show_impressions": 1,
+     "show_team_size": 1,
+     "show_region": 1
+    },
+    "payment_services": [],
+    "filters": [
+     {
+      "id": 422,
+      "name": "Engineering Students",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": "engineering",
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/engineering.svg"
+     },
+     {
+      "id": 424,
+      "name": "Postgraduate",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": "postgraduate",
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/postgraduate.svg"
+     },
+     {
+      "id": 426,
+      "name": "Undergraduate",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": "undergraduate",
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/undergraduate.svg"
+     },
+     {
+      "id": 4022,
+      "name": "Management",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": null,
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/.svg"
+     },
+     {
+      "id": 4023,
+      "name": "Medical",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": null,
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/.svg"
+     },
+     {
+      "id": 4024,
+      "name": "Law",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": null,
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/.svg"
+     },
+     {
+      "id": 4025,
+      "name": "Arts, Commerce, Sciences & Others",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": null,
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/.svg"
+     }
+    ],
+    "required_skills": [
+     {
+      "id": 645879,
+      "skill": "Creative Thinking",
+      "skill_name": "Creative Thinking",
+      "pivot": {
+       "entity_id": 1764596,
+       "subject_id": 645879,
+       "id": 6400863,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 643146,
+      "skill": "Adaptability",
+      "skill_name": "Adaptability",
+      "pivot": {
+       "entity_id": 1764596,
+       "subject_id": 643146,
+       "id": 6400864,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 647511,
+      "skill": "Teamwork and Collaboration",
+      "skill_name": "Teamwork and Collaboration",
+      "pivot": {
+       "entity_id": 1764596,
+       "subject_id": 647511,
+       "id": 6400865,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 1373,
+      "skill": "Problem Solving",
+      "skill_name": "Problem Solving",
+      "pivot": {
+       "entity_id": 1764596,
+       "subject_id": 1373,
+       "id": 6400866,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 645189,
+      "skill": "Technical Skills",
+      "skill_name": "Technical Skills",
+      "pivot": {
+       "entity_id": 1764596,
+       "subject_id": 645189,
+       "id": 6400867,
+       "ai_generated": true
+      }
+     }
+    ],
+    "locations": [],
+    "end_date": "2026-10-18T14:00:00+05:30",
+    "approved_date": "2026-10-03 15:05:53 GMT+0530",
+    "viewsCount": 449,
+    "registerCount": 6,
+    "regnRequirements": {
+     "opportunity_id": 1764596,
+     "start_regn_dt": "2026-10-01T00:00:00+05:30",
+     "end_regn_dt": "2026-10-15T00:00:00+05:30",
+     "show_deadline": 1,
+     "min_team_size": 1,
+     "max_team_size": 3,
+     "work_location_type": "city",
+     "eligibility": "{\"sector\":[\"students\"],\"engineering\":[],\"bSchools\":[],\"arts\":[],\"medicine\":[],\"law\":[],\"others\":[\"all\"],\"experience\":[\"all\"],\"studentPassoutYearsSelected\":[\"all\"],\"fresherPassoutYearsSelected\":[\"all\"],\"schoolFilteredClasses\":[\"all\"],\"minMarks\":{\"high_school_perc\":0,\"high_school_cgpa\":0},\"locations\":[],\"location_type\":\"all\",\"professionalEligibility\":null,\"fresherEligibility\":null}",
+     "reg_status": "STARTED",
+     "remainingDaysArray": {
+      "durations": 10,
+      "text": " days left"
+     },
+     "remain_days": "10 days left",
+     "remaining_time": 944266
+    }
+   }
+  ],
+  "first_page_url": "https://unstop.com/api/public/opportunity/search-result?&opportunity=hackathons&per_page=15&oppstatus=open&page=1",
+  "from": 1,
+  "last_page": 18,
+  "last_page_url": "https://unstop.com/api/public/opportunity/search-result?&opportunity=hackathons&per_page=15&oppstatus=open&page=18",
+  "links": [],
+  "next_page_url": null,
+  "path": "https://unstop.com/api/public/opportunity/search-result?",
+  "per_page": 15,
+  "prev_page_url": null,
+  "to": 15,
+  "total": 266
+ }
+}
