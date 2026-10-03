@@ -22,6 +22,11 @@ def _names(value) -> list[str]:
     return [i["name"] for i in items if isinstance(i, dict) and i.get("name")]
 
 
+def _real(value: str | None) -> str | None:
+    """Cerebral Valley uses "Other" as a placeholder location for unlisted venues."""
+    return value if value and value.strip() not in ("Other", "TBD", "TBA") else None
+
+
 def _is_hackathon(e: dict) -> bool:
     types = e.get("@type")
     types = types if isinstance(types, list) else [types]
@@ -52,9 +57,9 @@ def parse(page: str) -> list[Hackathon]:
                 starts_at=to_utc(e.get("startDate")),
                 ends_at=to_utc(e.get("endDate")),
                 mode=mode,
-                location=None if mode == "online" else loc.get("name"),
-                city=addr.get("addressLocality"),
-                country=addr.get("addressCountry"),
+                location=None if mode == "online" else _real(loc.get("name")),
+                city=_real(addr.get("addressLocality")),
+                country=_real(addr.get("addressCountry")),
             ))
     return out
 

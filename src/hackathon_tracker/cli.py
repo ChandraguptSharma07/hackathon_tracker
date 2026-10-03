@@ -33,7 +33,7 @@ def main(argv: list[str] | None = None) -> int:
             parser.error(f"unknown source(s): {', '.join(unknown)}")
         sources = {n: SOURCES[n] for n in names}
 
-    feed = build_feed(sources, previous=load_previous(args.out))
+    feed = build_feed(sources, previous=load_previous(args.out), carry_over=bool(args.only))
     write_feed(feed, args.out)
 
     for name, h in feed.sources.items():

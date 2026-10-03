@@ -31,6 +31,7 @@ class SourceHealth(BaseModel):
 
 class Feed(BaseModel):
     generated_at: datetime
+    tracking_since: datetime | None = None  # first run; listings seen then are not "new"
     count: int
     sources: dict[str, SourceHealth]
     hackathons: list[Hackathon]
@@ -69,7 +70,9 @@ def load_previous(path: Path) -> Feed | None:
 
 
 def build_feed(sources: dict[str, Fetcher] | None = None, previous: Feed | None = None,
-               now: datetime | None = None) -> Feed:
+               now: datetime | None = None, carry_over: bool = False) -> Feed:
+    """Run `sources` and build the feed. With `carry_over`, sources not run this time keep
+    their listings and health from `previous` (used for partial refreshes)."""
     sources = SOURCES if sources is None else sources
     now = now or datetime.now(UTC)
     prev_items = previous.hackathons if previous else []
@@ -88,6 +91,13 @@ def build_feed(sources: dict[str, Fetcher] | None = None, previous: Feed | None 
         health[name] = h
         collected.extend(items)
 
+    if carry_over and previous:
+        for name, h in previous.sources.items():
+            if name not in sources:
+                health[name] = h
+                collected.extend(p.model_copy(update={"also_on": []})
+                                 for p in prev_items if p.source == name)
+
     first_seen = {p.id: p.first_seen for p in prev_items if p.first_seen}
     for p in prev_items:  # merged records remember their secondary listings' ages too
         for listing in p.also_on:
@@ -98,7 +108,9 @@ def build_feed(sources: dict[str, Fetcher] | None = None, previous: Feed | None 
     for h in merged:
         h.first_seen = first_seen.get(h.id) or first_seen.get(h.url) or now
     merged.sort(key=sort_key)
-    return Feed(generated_at=now, count=len(merged), sources=health, hackathons=merged)
+    since = (previous.tracking_since or previous.generated_at) if previous else now
+    return Feed(generated_at=now, tracking_since=since, count=len(merged), sources=health,
+                hackathons=merged)
 
 
 def write_feed(feed: Feed, path: Path) -> None:
