@@ -1,0 +1,111 @@
+{
+ "count": 3,
+ "next": null,
+ "previous": null,
+ "results": [
+  {
+   "id": 2286,
+   "uname": "weex-ai-wars2",
+   "title": "WEEX AI Wars II: Rise of Intelligence",
+   "image_url": "https://cdn.dorahacks.io/static/files/19f3babdef976002263ee6b47de848d8.jpeg",
+   "ecosystem": "WEEX,Al Trading,Hackathon,Web3,Crypto",
+   "tags": "Al,Trading,Algorithmic,Web3,Crypto,Risk Management",
+   "visibility": 0,
+   "owner": {
+    "id": 11727,
+    "name": "WEEX LABs",
+    "logo": "https://cdn.dorahacks.io/static/files/19a5282bb8220e75b1655f7430996eb7.png"
+   },
+   "timeline_start": 1782792000,
+   "timeline_end": 1791820740,
+   "timeline_pre_register": 1788364680,
+   "timeline_old_end": null,
+   "is_extended": false,
+   "venue_form": "Virtual",
+   "venue_country_id": null,
+   "venue_city_id": null,
+   "venue_name": null,
+   "venue_address": null,
+   "bonus_price": 200000,
+   "bonus_token": "USD",
+   "bonus_description": [],
+   "buidls_count": 0,
+   "hackers_count": 208,
+   "winner_announced": false,
+   "weight": 12000,
+   "is_organizer": false,
+   "is_collaborator": false
+  },
+  {
+   "id": 2385,
+   "uname": "web3-social-good-2026",
+   "title": "From Vision to Impact: Building Web3 for Social Good — Collaborate. Innovate. Build for Good 2026",
+   "image_url": "https://cdn.dorahacks.io/static/files/1a0cd1d52b2986ac3a71d8d4a21b08a8.jpg",
+   "ecosystem": "Blockchain,Decentralized Identity,DAPP,Web3",
+   "tags": "Web3,Social Impact,Blockchain,AI,Sustainability",
+   "visibility": 0,
+   "owner": {
+    "id": 16154,
+    "name": "School of Computing and Information Systems, SMU",
+    "logo": "https://cdn.dorahacks.io/static/files/1a07fd034ad120e9f84ec2642d49e449.png"
+   },
+   "timeline_start": 1787702400,
+   "timeline_end": 1792886400,
+   "timeline_pre_register": 0,
+   "timeline_old_end": null,
+   "is_extended": false,
+   "venue_form": "IRL",
+   "venue_country_id": 190,
+   "venue_city_id": 1702341327,
+   "venue_name": "Singapore Management University (SMU)",
+   "venue_address": "80 Stamford Road, Singapore 178902",
+   "bonus_price": 0,
+   "bonus_token": "USD",
+   "bonus_description": [
+    {
+     "id": 1,
+     "name": "Pending"
+    }
+   ],
+   "buidls_count": 0,
+   "hackers_count": 20,
+   "winner_announced": false,
+   "weight": 10000,
+   "is_organizer": false,
+   "is_collaborator": false
+  },
+  {
+   "id": 2349,
+   "uname": null,
+   "title": "Anna AI App Builder Program",
+   "image_url": "https://cdn.dorahacks.io/static/files/19fd00a327ae41d0081e56b43d2a66d9.png",
+   "ecosystem": "Anna,OpenAI,React,JavaScript,LLM",
+   "tags": "AI,AI Agents,Anna,AI-Native Apps,LLM,Productivity,Developer Tools,Workflows",
+   "visibility": 0,
+   "owner": {
+    "id": 15536,
+    "name": "Anna AI",
+    "logo": "https://cdn.dorahacks.io/static/files/19e87afe438c94a992ee95b4a58acb23.jpg"
+   },
+   "timeline_start": 1785556800,
+   "timeline_end": 1793462340,
+   "timeline_pre_register": 1785556800,
+   "timeline_old_end": 1790783940,
+   "is_extended": true,
+   "venue_form": "Virtual",
+   "venue_country_id": null,
+   "venue_city_id": null,
+   "venue_name": null,
+   "venue_address": null,
+   "bonus_price": 6000,
+   "bonus_token": "USD",
+   "bonus_description": [],
+   "buidls_count": 1,
+   "hackers_count": 71,
+   "winner_announced": false,
+   "weight": 10000,
+   "is_organizer": false,
+   "is_collaborator": false
+  }
+ ]
+}

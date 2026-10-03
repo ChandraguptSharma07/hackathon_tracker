@@ -17,6 +17,15 @@ USD_RATES = {
     "SGD": 0.74,
     "JPY": 0.0067,
     "CHF": 1.12,
+    "ZAR": 0.055,
+    "HKD": 0.13,
+    "BRL": 0.18,
+    "NGN": 0.00065,
+    "KES": 0.0077,
+    # Stablecoins used for crypto hackathon prizes.
+    "USDT": 1.0,
+    "USDC": 1.0,
+    "DAI": 1.0,
 }
 
 CURRENCY_SYMBOLS = {"$": "USD", "€": "EUR", "£": "GBP", "₹": "INR", "¥": "JPY"}
@@ -54,13 +63,14 @@ def parse_money(text: str | None) -> tuple[float | None, str | None]:
     if not text:
         return None, None
     clean = re.sub(r"<[^>]+>", "", html.unescape(text)).strip()
+    clean = re.sub(r"(?<=\d)[ \u00a0\u202f](?=\d{3}\b)", "", clean)  # "25 000" -> "25000"
     match = re.search(r"\d[\d,]*(?:\.\d+)?", clean)
     if not match:
         return None, None
     amount = float(match.group().replace(",", ""))
     currency = next((code for sym, code in CURRENCY_SYMBOLS.items() if sym in clean), None)
     if currency is None:
-        code = re.search(r"\b([A-Z]{3})\b", clean)
+        code = re.search(r"\b([A-Z]{3,4})\b", clean)
         currency = code.group(1) if code else "USD"
     return amount, currency
 

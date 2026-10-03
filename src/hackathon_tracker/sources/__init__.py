@@ -8,11 +8,13 @@ from collections.abc import Callable
 import httpx
 
 from ..models import Hackathon
-from . import cerebralvalley, devfolio, devpost, hackerearth, lablab, mlh, unstop
+from . import (cerebralvalley, devfolio, devpost, dorahacks, ethglobal, hackclub, hackerearth,
+               kaggle, lablab, luma, mlh, taikai, unstop, zindi)
 
 Fetcher = Callable[[httpx.Client], list[Hackathon]]
 
 SOURCES: dict[str, Fetcher] = {
     m.NAME: m.fetch
-    for m in (devpost, mlh, devfolio, unstop, hackerearth, cerebralvalley, lablab)
+    for m in (devpost, mlh, devfolio, unstop, hackerearth, cerebralvalley, lablab, ethglobal,
+              dorahacks, luma, hackclub, taikai, kaggle, zindi)
 }

@@ -27,6 +27,9 @@ def test_parse_date_range_garbage():
     ("₹ 50,000", (50000, "INR")),
     ("€1.500", (1.5, "EUR")),
     ("2500 CAD", (2500, "CAD")),
+    ("$25 000 USD", (25000, "USD")),
+    ("R250 000 ZAR", (250000, "ZAR")),
+    ("10 000 USDT", (10000, "USDT")),
     ("", (None, None)),
     ("Swag", (None, None)),
 ])

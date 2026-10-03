@@ -7,8 +7,9 @@ from difflib import SequenceMatcher
 from .models import Hackathon, Listing
 
 # Earlier wins as the primary record when two listings merge.
-SOURCE_PRIORITY = ["devpost", "mlh", "cerebralvalley", "lablab", "devfolio", "unstop",
-                   "hackerearth"]
+SOURCE_PRIORITY = ["devpost", "mlh", "ethglobal", "cerebralvalley", "lablab", "kaggle",
+                   "devfolio", "dorahacks", "taikai", "unstop", "zindi", "hackerearth",
+                   "hackclub", "luma"]
 
 NOISE_WORDS = {"the", "hackathon", "a", "an", "of", "and", "edition"}
 DATE_SLACK = timedelta(days=3)

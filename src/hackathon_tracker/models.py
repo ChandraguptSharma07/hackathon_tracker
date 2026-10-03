@@ -4,6 +4,7 @@ from typing import Literal
 from pydantic import BaseModel, Field
 
 Mode = Literal["online", "in_person", "hybrid"]
+Kind = Literal["hackathon", "competition"]  # competition = ML/data contest (Kaggle, Zindi)
 
 
 class Listing(BaseModel):
@@ -23,6 +24,7 @@ class Hackathon(BaseModel):
     source: str
     title: str
     url: str
+    kind: Kind = "hackathon"
     organizer: str | None = None
     description: str | None = None
     image_url: str | None = None

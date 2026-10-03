@@ -1,0 +1,73 @@
+{
+ "data": [
+  {
+   "end_time": "2026-10-04T23:59:00.000Z",
+   "entries_close_at": null,
+   "id": "road-barbados-historic-handwriting-challenge",
+   "image": "https://zindi-public-release.s3.eu-west-2.amazonaws.com/uploads/competition/image/598/thumb_5c8834a4-e5f0-42f4-b21f-2ca4c8d9c5d4.png",
+   "is_access_restricted": false,
+   "is_beginner_friendly": false,
+   "is_participant": false,
+   "kind": "competition",
+   "open": true,
+   "organization": null,
+   "participations_count": 2001,
+   "reward": "$25 000 USD",
+   "reward_type": "prize",
+   "sealed": false,
+   "secret_code_required": false,
+   "show_ranks": false,
+   "start_time": "2026-07-03T15:00:00.000Z",
+   "title": "R.O.A.D. Barbados Historic Handwriting Challenge",
+   "cohort": false
+  },
+  {
+   "end_time": "2026-10-18T21:59:00.000Z",
+   "entries_close_at": null,
+   "id": "climate-risk-health-prediction-challenge",
+   "image": "https://zindi-public-release.s3.eu-west-2.amazonaws.com/uploads/competition/image/742/thumb_abdb6538-7319-420a-a96b-7d2c8d616553.png",
+   "is_access_restricted": false,
+   "is_beginner_friendly": true,
+   "is_participant": false,
+   "kind": "competition",
+   "open": true,
+   "organization": null,
+   "participations_count": 1273,
+   "reward": "$1 000 USD",
+   "reward_type": "prize",
+   "sealed": false,
+   "secret_code_required": false,
+   "show_ranks": false,
+   "start_time": "2026-08-18T13:00:00.000Z",
+   "title": "Climate Risk and Health Prediction Challenge",
+   "cohort": false
+  },
+  {
+   "end_time": "2026-09-13T21:59:00.000Z",
+   "entries_close_at": null,
+   "id": "one-step-ahead-of-drought-forecasting-global-water-storage-challenge",
+   "image": "https://zindi-public-release.s3.eu-west-2.amazonaws.com/uploads/competition/image/697/thumb_21dcdca1-ad12-463a-84d9-b1d620315de5.png",
+   "is_access_restricted": false,
+   "is_beginner_friendly": false,
+   "is_participant": false,
+   "kind": "competition",
+   "open": false,
+   "organization": "ITU",
+   "participations_count": 1395,
+   "reward": "€2 000 EUR",
+   "reward_type": "prize",
+   "sealed": false,
+   "secret_code_required": false,
+   "show_ranks": true,
+   "start_time": "2026-07-09T15:00:00.000Z",
+   "title": "A Step Ahead of Drought: Forecasting Global Water Storage Challenge",
+   "cohort": false
+  }
+ ],
+ "meta": {
+  "total_count": 204,
+  "open_count": 4,
+  "closed_count": 200,
+  "per_page": 20
+ }
+}
