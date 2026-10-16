@@ -11,6 +11,7 @@ from hackathon_tracker.parsing import (next_flight, objects_with_key, parse_date
     ("Oct 01 - 08, 2026", (2026, 10, 1), (2026, 10, 8)),
     ("Aug 23, 2026 - Jan 02, 2027", (2026, 8, 23), (2027, 1, 2)),
     ("Dec 20 - Jan 10, 2027", (2026, 12, 20), (2027, 1, 10)),
+    ("Oct 16, 2026", (2026, 10, 16), (2026, 10, 16)),
 ])
 def test_parse_date_range(text, start, end):
     s, e = parse_date_range(text)

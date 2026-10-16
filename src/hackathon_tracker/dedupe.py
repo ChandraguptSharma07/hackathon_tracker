@@ -53,11 +53,13 @@ def merge(primary: Hackathon, other: Hackathon) -> Hackathon:
     primary.sponsors = sorted(set(primary.sponsors) | set(other.sponsors))
     if other.participants and (primary.participants or 0) < other.participants:
         primary.participants = other.participants
-    known = {primary.url} | {l.url for l in primary.also_on}
+    # Keyed by site and URL: aggregators like Cerebral Valley link straight to the lablab
+    # page, and both sites listing it still matters (e.g. for registration rules).
+    known = {(primary.source, primary.url)} | {(l.source, l.url) for l in primary.also_on}
     for listing in [Listing(source=other.source, url=other.url), *other.also_on]:
-        if listing.url not in known:
+        if (listing.source, listing.url) not in known:
             primary.also_on.append(listing)
-            known.add(listing.url)
+            known.add((listing.source, listing.url))
     return primary
 
 

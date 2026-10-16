@@ -88,11 +88,16 @@ def _month_day(month: str, day: str, year: int) -> datetime | None:
 
 def parse_date_range(text: str | None) -> tuple[datetime | None, datetime | None]:
     """Parse Devpost-style ranges: "Aug 31 - Oct 23, 2026", "Oct 01 - 08, 2026",
-    "Aug 23, 2026 - Jan 02, 2027". The end date is set to the end of that day (UTC).
+    "Aug 23, 2026 - Jan 02, 2027", or a single day "Oct 16, 2026". The end date is set to
+    the end of that day (UTC).
     """
     if not text:
         return None, None
     text = text.strip()
+    single = re.fullmatch(r"(\w{3})\w* (\d{1,2}), (\d{4})", text)
+    if single:
+        day = _month_day(single[1], single[2], int(single[3]))
+        return day, datetime.combine(day.date(), time(23, 59), tzinfo=UTC) if day else None
     m = re.fullmatch(r"(\w{3})\w* (\d{1,2}), (\d{4}) - (\w{3})\w* (\d{1,2}), (\d{4})", text)
     if m:
         start = _month_day(m[1], m[2], int(m[3]))

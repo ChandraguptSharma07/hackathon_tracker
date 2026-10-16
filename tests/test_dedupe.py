@@ -43,3 +43,11 @@ def test_same_source_never_merges():
     out = dedupe([make("cerebralvalley", "Global AI Hackathon"),
                   make("cerebralvalley", "Global AI Hackathon ")])
     assert len(out) == 2
+
+
+def test_same_url_from_two_sites_keeps_both_sources():
+    cv = make("cerebralvalley", "AMD Developer Hackathon")
+    lab = make("lablab", "AMD Developer Hackathon")
+    lab.url = cv.url = "https://lablab.ai/ai-hackathons/amd"
+    out = dedupe([cv, lab])
+    assert [l.source for l in out[0].also_on] == ["lablab"]
