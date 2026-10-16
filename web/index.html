@@ -12,6 +12,10 @@
     <div class="wrap">
       <h1>Hackathon Tracker</h1>
       <p class="sub" id="summary">Loading…</p>
+      <nav class="views" aria-label="Views">
+        <button type="button" data-view="all" aria-pressed="true">All listings</button>
+        <button type="button" data-view="mine" aria-pressed="false">My hackathons <span id="mine-count" class="pill"></span></button>
+      </nav>
       <nav class="quick" aria-label="Quick views">
         Quick view:
         <a href="?metro=Delhi+NCR&amp;mode=onsite">In person in Delhi NCR</a>
@@ -75,9 +79,25 @@
       </div>
     </form>
 
-    <p class="count" id="count" aria-live="polite"></p>
-    <ol class="list" id="list"></ol>
-    <button type="button" id="more" class="more" hidden>Show more</button>
+    <p class="warning" id="storage-warning" hidden>This browser isn't letting the page save
+      data (private window or blocked site data), so tracking lasts only until you close the tab.
+      Use Export to keep a copy.</p>
+
+    <section id="all-view">
+      <p class="count" id="count" aria-live="polite"></p>
+      <ol class="list" id="list"></ol>
+      <button type="button" id="more" class="more" hidden>Show more</button>
+    </section>
+
+    <section id="mine-view" hidden>
+      <div class="mine-tools">
+        <p class="count" id="mine-summary"></p>
+        <button type="button" id="mine-calendar">Add tracked dates to calendar</button>
+        <button type="button" id="mine-export">Export</button>
+        <label class="file-button">Import<input type="file" id="mine-import" accept="application/json,.json"></label>
+      </div>
+      <div id="mine-groups"></div>
+    </section>
   </main>
 
   <footer class="wrap foot">

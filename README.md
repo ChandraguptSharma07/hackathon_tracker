@@ -46,6 +46,22 @@ Kaggle and Zindi entries are tagged as ML competitions and can be filtered by Ty
 
 No source uses an AI API; everything is plain HTTP plus parsing.
 
+## Tracking your hackathons
+
+Every listing has a **☆ Track** menu: Interested, Registered, Submitted, Done or Not going.
+"My hackathons" groups what you track by stage, with a notes box per event (team, idea,
+repo), a result for Done (won, placed, no prize), the next step ("Register by…", "Starts in 3
+days", "Running: submit by…"), and a button that exports all tracked dates, plus "Register by"
+reminders, as one calendar file.
+
+- Tracking is saved in your browser (localStorage); there's no account. Use **Export** for a
+  backup or to move to another browser, and **Import** to merge a file back in (for the same
+  event, the newer edit wins). Open tabs stay in sync.
+- Each tracked entry keeps a copy of the listing, so it stays in your list after the event
+  ends and drops out of the feed (shown as "No longer listed").
+- Not going hides an event from All listings. Anything else you track stays visible there even
+  after its registration closes.
+
 ## Registration status
 
 Listings whose registration has closed are hidden by default ("Show closed registration"

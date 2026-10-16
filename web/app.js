@@ -1,3 +1,5 @@
+import { createTracker, RESULTS, STATUS, STATUSES } from "./tracker.js";
+
 const DATA_URL = "data/hackathons.json";
 const PAGE = 60;
 const DAY = 86_400_000;
@@ -28,7 +30,10 @@ const dateYearFmt = new Intl.DateTimeFormat(undefined, { month: "short", day: "n
 const money = (n, cur = "USD") =>
   new Intl.NumberFormat(undefined, { style: "currency", currency: cur, maximumFractionDigits: 0 }).format(n);
 
+const tracker = createTracker();
+
 let all = [];
+let view = "all";  // "all" listings or "mine" (tracked)
 let trackingSince = 0;
 let disabledSources = new Set();
 let shown = PAGE;
@@ -77,6 +82,7 @@ function readState() {
     else if (p.has(el.name)) el.value = p.get(el.name);
   }
   disabledSources = new Set((p.get("off") || "").split(",").filter(Boolean));
+  view = p.get("view") === "mine" ? "mine" : "all";
 }
 
 function writeState() {
@@ -87,6 +93,7 @@ function writeState() {
     else if (el.value && !(el.name === "sort" && el.value === "deadline")) p.set(el.name, el.value);
   }
   if (disabledSources.size) p.set("off", [...disabledSources].join(","));
+  if (view === "mine") p.set("view", "mine");
   const qs = p.toString();
   history.replaceState(null, "", qs ? `?${qs}` : location.pathname);
 }
@@ -109,7 +116,10 @@ function filtered() {
     if (f.prize && !h.prize_usd) return false;
     if (f.fresh && !h.isNew(7)) return false;
     if (!terms.every((t) => h.haystack.includes(t))) return false;
-    if (!f.closed && h.regOpen() === false) { hiddenClosed += 1; return false; }
+    const status = tracker.get(h)?.status;
+    if (status === "not_going") return false;
+    // Something you're tracking stays visible even after its registration closes.
+    if (!f.closed && !status && h.regOpen() === false) { hiddenClosed += 1; return false; }
     return true;
   });
   const far = 8.64e15;
@@ -161,7 +171,54 @@ function prize(h) {
   return `<span class="prize">${esc(main)}</span>${approx}`;
 }
 
-function card(h, idx) {
+function trackSelect(h, idx, entry) {
+  const status = entry?.status || "";
+  const options = [`<option value="">☆ Track</option>`,
+    ...STATUSES.map((s) => `<option value="${s.id}"${s.id === status ? " selected" : ""}>${s.icon} ${s.label}</option>`)];
+  if (status) options.push(`<option value="remove">Stop tracking</option>`);
+  return `<select class="track status-${status || "none"}" data-track="${idx}" aria-label="Track ${esc(h.title)}">${options.join("")}</select>`;
+}
+
+// What to do next for something you're tracking, given its stage and dates.
+function nextStep(h, entry) {
+  const now = Date.now();
+  const when = (d) => dateYearFmt.format(d);
+  const inDays = (d) => {
+    const days = Math.ceil((d - now) / DAY);
+    return days <= 1 ? "within a day" : `in ${days} days`;
+  };
+  switch (entry.status) {
+    case "interested":
+      if (h.regOpen() === false) return "Registration has closed.";
+      return h.deadline ? `Register by ${when(h.deadline)}${h.registration_inferred ? " (estimated)" : ""}.` : "";
+    case "registered":
+      if (h.start && h.start > now) return `Starts ${inDays(h.start)} (${when(h.start)}).`;
+      if (h.end && h.end > now) return `Running: submit by ${when(h.end)}, ${inDays(h.end)}.`;
+      return "Ended: mark it Submitted or Done.";
+    case "submitted":
+      return h.end && h.end > now ? `Submissions close ${when(h.end)}; results after that.` : "Record the result when it's out.";
+    default:
+      return "";
+  }
+}
+
+function trackerPanel(h, idx, entry) {
+  const result = entry.status === "done"
+    ? `<select class="result" data-result="${idx}" aria-label="Result">
+        <option value="">Result…</option>
+        ${RESULTS.map((r) => `<option value="${r.id}"${r.id === entry.result ? " selected" : ""}>${r.label}</option>`).join("")}
+      </select>`
+    : "";
+  const step = nextStep(h, entry);
+  return `<div class="tracker-panel">
+      ${step ? `<p class="next">${esc(step)}</p>` : ""}
+      ${result}
+      <textarea data-note="${idx}" rows="2" placeholder="Notes: team, idea, repo, links…" aria-label="Notes for ${esc(h.title)}">${esc(entry.note || "")}</textarea>
+    </div>`;
+}
+
+function card(h, idx, mine = false) {
+  const entry = tracker.get(h);
   const where = h.mode === "online" ? "Online"
     : [h.location || [h.city, h.countryName].filter(Boolean).join(", "), h.mode === "hybrid" ? "(hybrid)" : ""]
       .filter(Boolean).join(" ");
@@ -173,7 +230,7 @@ function card(h, idx) {
   const img = h.image_url
     ? `<img class="thumb" src="${esc(h.image_url)}" alt="" loading="lazy" referrerpolicy="no-referrer">`
     : `<div class="thumb" aria-hidden="true"></div>`;
-  return `<li class="card">
+  return `<li class="card${entry ? ` tracked status-${entry.status}` : ""}">
     ${img}
     <div>
       <h2><a href="${esc(h.url)}" target="_blank" rel="noopener">${esc(h.title)}</a></h2>
@@ -184,6 +241,7 @@ function card(h, idx) {
         ${h.participants ? `<span>${h.participants.toLocaleString()} registered</span>` : ""}
       </p>
       <div class="tags">
+        ${h.gone ? `<span class="tag">No longer listed</span>` : ""}
         ${h.isNew(3) ? `<span class="tag new">New</span>` : ""}
         ${h.running() && h.regOpen() !== false ? `<span class="tag live">Running · open to join</span>` : ""}
         ${h.registration_note ? `<span class="tag note">${esc(h.registration_note)}</span>` : ""}
@@ -191,10 +249,12 @@ function card(h, idx) {
         ${(h.sponsors || []).map((s) => `<button type="button" class="tag sponsor" data-sponsor="${esc(s)}">${esc(s)}</button>`).join("")}
         ${(h.themes || []).slice(0, 4).map((t) => `<span class="tag">${esc(t)}</span>`).join("")}
       </div>
+      ${mine && entry ? trackerPanel(h, idx, entry) : ""}
     </div>
     <div class="side">
+      ${trackSelect(h, idx, entry)}
       ${prize(h)}
-      ${deadlineBadge(h)}
+      ${!entry || entry.status === "interested" ? deadlineBadge(h) : ""}
       <span class="listed">${listings}</span>
       ${h.start || h.end ? `<button type="button" class="ics" data-idx="${idx}">Add to calendar</button>` : ""}
     </div>
@@ -206,11 +266,71 @@ let hiddenClosed = 0;  // matches of the other filters left out only for closed 
 
 function render() {
   writeState();
+  const mine = view === "mine";
+  form.hidden = mine;
+  $("#all-view").hidden = mine;
+  $("#mine-view").hidden = !mine;
+  $(".quick").hidden = mine;
+  document.querySelectorAll("[data-view]").forEach((b) =>
+    b.setAttribute("aria-pressed", String(b.dataset.view === view)));
+  updateMineCount();
+  // Only one view's cards may exist at a time: both index into `current`.
+  if (mine) {
+    $("#list").innerHTML = "";
+    return renderMine();
+  }
+  $("#mine-groups").innerHTML = "";
   current = filtered();
   const hidden = hiddenClosed ? ` · ${hiddenClosed} with closed registration hidden` : "";
   $("#count").textContent = `${current.length} of ${all.length} listings${hidden}`;
-  $("#list").innerHTML = current.slice(0, shown).map(card).join("");
+  $("#list").innerHTML = current.slice(0, shown).map((h, i) => card(h, i)).join("");
   $("#more").hidden = current.length <= shown;
+}
+
+function updateMineCount() {
+  const active = tracker.entries().filter((e) => e.status !== "not_going").length;
+  $("#mine-count").textContent = active ? String(active) : "";
+}
+
+// Tracked entries joined with today's feed; ones the feed dropped come from their snapshot.
+function trackedListings() {
+  const byId = new Map(all.map((h) => [h.id, h]));
+  const byUrl = new Map(all.flatMap((h) => [h.url, ...(h.also_on || []).map((l) => l.url)].map((u) => [u, h])));
+  return tracker.entries().map((entry) => {
+    const s = entry.listing;
+    const live = byId.get(s.id) || [s.url, ...(s.also_on || []).map((l) => l.url)].map((u) => byUrl.get(u)).find(Boolean);
+    return { entry, h: live || Object.assign(prepare(structuredClone(s)), { gone: true }) };
+  });
+}
+
+function renderMine() {
+  const rows = trackedListings();
+  const far = 8.64e15;
+  // Soonest thing that matters for the stage first.
+  const key = ({ h, entry }) => {
+    if (entry.status === "interested") return h.deadline ?? far;
+    if (entry.status === "registered") return (h.start > Date.now() ? h.start : h.end) ?? far;
+    if (entry.status === "done") return -(h.end ?? 0);
+    return h.end ?? far;
+  };
+  current = [];
+  const groups = STATUSES.map((s) => {
+    const items = rows.filter((r) => r.entry.status === s.id).sort((a, b) => key(a) - key(b));
+    if (!items.length) return "";
+    const cards = items.map(({ h }) => { current.push(h); return card(h, current.length - 1, true); }).join("");
+    const body = `<ol class="list">${cards}</ol>`;
+    const heading = `${s.icon} ${s.label} <span class="pill">${items.length}</span>`;
+    return s.id === "not_going"
+      ? `<details class="group"><summary><h2>${heading}</h2></summary>${body}</details>`
+      : `<section class="group"><h2>${heading}</h2>${body}</section>`;
+  }).join("");
+  const active = rows.filter((r) => r.entry.status !== "not_going").length;
+  $("#mine-summary").textContent = rows.length
+    ? `${active} tracked${tracker.persistent ? ", saved in this browser" : ""}.`
+    : "";
+  $("#mine-groups").innerHTML = groups || `<p class="empty">Nothing tracked yet. Use the
+    <strong>☆ Track</strong> menu on any listing to save it here as Interested, Registered,
+    Submitted or Done.</p>`;
 }
 
 function fillSelect(name, values) {
@@ -246,26 +366,53 @@ function icsDate(d) {
   return d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
 }
 
-function downloadIcs(h) {
-  const start = h.start || h.end;
-  const end = h.end && h.end > start ? h.end : new Date(start.getTime() + 3_600_000);
-  const text = (s) => String(s || "").replace(/[\\;,]/g, (c) => `\\${c}`).replace(/\n/g, "\\n");
-  const lines = [
-    "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//hackathon-tracker//EN", "BEGIN:VEVENT",
-    `UID:${h.id}@hackathon-tracker`, `DTSTAMP:${icsDate(new Date())}`,
+const icsText = (s) => String(s || "").replace(/[\\;,]/g, (c) => `\\${c}`).replace(/\n/g, "\\n");
+
+function icsEvent(uid, summary, start, end, h) {
+  return [
+    "BEGIN:VEVENT", `UID:${uid}@hackathon-tracker`, `DTSTAMP:${icsDate(new Date())}`,
     `DTSTART:${icsDate(start)}`, `DTEND:${icsDate(end)}`,
-    `SUMMARY:${text(h.title)}`, `URL:${h.url}`,
-    `DESCRIPTION:${text([h.organizer, h.deadline ? `Join by: ${h.deadline.toUTCString()}${h.registration_inferred ? " (estimated)" : ""}` : "", h.url].filter(Boolean).join("\n"))}`,
-    h.mode !== "online" && h.location ? `LOCATION:${text(h.location)}` : "",
-    "END:VEVENT", "END:VCALENDAR",
+    `SUMMARY:${icsText(summary)}`, `URL:${h.url}`,
+    `DESCRIPTION:${icsText([h.organizer, h.deadline ? `Join by: ${h.deadline.toUTCString()}${h.registration_inferred ? " (estimated)" : ""}` : "", h.url].filter(Boolean).join("\n"))}`,
+    h.mode !== "online" && h.location ? `LOCATION:${icsText(h.location)}` : "",
+    "END:VEVENT",
   ].filter(Boolean);
-  const blob = new Blob([lines.join("\r\n")], { type: "text/calendar" });
+}
+
+function eventLines(h) {
+  const start = h.start || h.end;
+  if (!start) return [];
+  const end = h.end && h.end > start ? h.end : new Date(start.getTime() + 3_600_000);
+  return icsEvent(h.id, h.title, start, end, h);
+}
+
+function download(filename, text, type) {
   const a = Object.assign(document.createElement("a"), {
-    href: URL.createObjectURL(blob),
-    download: `${h.title.replace(/[^\w-]+/g, "_").slice(0, 60)}.ics`,
+    href: URL.createObjectURL(new Blob([text], { type })),
+    download: filename,
   });
   a.click();
   URL.revokeObjectURL(a.href);
+}
+
+function downloadIcs(events, name) {
+  const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//hackathon-tracker//EN", ...events, "END:VCALENDAR"];
+  download(`${name.replace(/[^\w-]+/g, "_").slice(0, 60)}.ics`, lines.join("\r\n"), "text/calendar");
+}
+
+// Event dates for everything you're tracking, plus a "Register by" reminder for the
+// ones you're only interested in so far.
+function trackedCalendar() {
+  const events = [];
+  for (const { h, entry } of trackedListings()) {
+    if (!["interested", "registered", "submitted"].includes(entry.status)) continue;
+    events.push(...eventLines(h));
+    if (entry.status === "interested" && h.deadline && h.deadline > Date.now()) {
+      const reminder = new Date(h.deadline.getTime() - 3_600_000);
+      events.push(...icsEvent(`${h.id}-register`, `Register: ${h.title}`, reminder, h.deadline, h));
+    }
+  }
+  return events;
 }
 
 // ---- wiring -----------------------------------------------------------------
@@ -297,7 +444,78 @@ $("#list").addEventListener("click", (e) => {
     return;
   }
   const ics = e.target.closest(".ics");
-  if (ics) downloadIcs(current[Number(ics.dataset.idx)]);
+  if (ics) {
+    const h = current[Number(ics.dataset.idx)];
+    downloadIcs(eventLines(h), h.title);
+  }
+});
+
+// ---- tracking ---------------------------------------------------------------
+
+let quietSave = false;  // note typing saves without re-rendering (keeps focus and caret)
+
+tracker.onChange(() => {
+  if (quietSave) { quietSave = false; updateMineCount(); return; }
+  render();
+});
+
+document.querySelectorAll("[data-view]").forEach((b) => b.addEventListener("click", () => {
+  view = b.dataset.view;
+  shown = PAGE;
+  render();
+  window.scrollTo({ top: 0 });
+}));
+
+document.addEventListener("change", (e) => {
+  const track = e.target.closest("[data-track]");
+  if (track) {
+    const h = current[Number(track.dataset.track)];
+    if (track.value === "" || track.value === "remove") tracker.remove(h);
+    else tracker.setStatus(h, track.value);
+    return;
+  }
+  const note = e.target.closest("[data-note]");
+  if (note) {  // fires on blur: save right away instead of waiting for the debounce
+    const h = current[Number(note.dataset.note)];
+    clearTimeout(noteTimers.get(h.id));
+    quietSave = true;
+    tracker.setNote(h, note.value);
+    return;
+  }
+  const result = e.target.closest("[data-result]");
+  if (result) tracker.setResult(current[Number(result.dataset.result)], result.value || undefined);
+});
+
+const noteTimers = new Map();
+document.addEventListener("input", (e) => {
+  const note = e.target.closest("[data-note]");
+  if (!note) return;
+  const h = current[Number(note.dataset.note)];
+  clearTimeout(noteTimers.get(h.id));
+  noteTimers.set(h.id, setTimeout(() => { quietSave = true; tracker.setNote(h, note.value); }, 400));
+});
+
+$("#mine-export").addEventListener("click", () => {
+  const day = new Date().toISOString().slice(0, 10);
+  download(`hackathon-tracker-${day}.json`, tracker.exportData(), "application/json");
+});
+
+$("#mine-import").addEventListener("change", async (e) => {
+  const file = e.target.files[0];
+  e.target.value = "";
+  if (!file) return;
+  try {
+    const n = tracker.importData(await file.text());
+    alert(n ? `Imported ${n} tracked hackathon${n === 1 ? "" : "s"}.` : "Nothing new in that file.");
+  } catch {
+    alert("That file isn't a Hackathon Tracker export.");
+  }
+});
+
+$("#mine-calendar").addEventListener("click", () => {
+  const events = trackedCalendar();
+  if (!events.length) return alert("No upcoming dates among the hackathons you're tracking.");
+  downloadIcs(events, "tracked-hackathons");
 });
 
 async function main() {
@@ -316,6 +534,7 @@ async function main() {
   fillSelect("metro", counts(all.map((h) => h.metro)));
   fillSelect("country", counts(all.map((h) => h.countryName)));
   readState();
+  $("#storage-warning").hidden = tracker.persistent;
   sourceChips(feed.sources);
   health(feed);
   const updated = new Date(feed.generated_at);

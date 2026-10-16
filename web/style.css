@@ -46,6 +46,18 @@ a { color: var(--accent); }
 .top { padding: 28px 0 12px; }
 .top h1 { margin: 0; font-size: 26px; letter-spacing: -0.01em; }
 .sub { margin: 4px 0 0; color: var(--muted); }
+.views { display: flex; gap: 6px; margin-top: 14px; }
+.views button {
+  font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+  padding: 6px 14px; border-radius: 999px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--muted);
+}
+.views button[aria-pressed="true"] { background: var(--text); color: var(--bg); border-color: var(--text); }
+.pill {
+  display: inline-block; min-width: 1.4em; padding: 0 6px; border-radius: 999px;
+  font-size: 12px; text-align: center; background: var(--accent-soft); color: var(--accent);
+}
+.pill:empty { display: none; }
 .quick { margin-top: 8px; font-size: 14px; color: var(--muted); }
 .quick a { margin-left: 4px; font-weight: 600; }
 
@@ -138,6 +150,43 @@ button.tag { cursor: pointer; font: inherit; font-size: 12px; }
 .listed { color: var(--muted); }
 .listed a { color: var(--muted); }
 .ics { font: inherit; font-size: 12px; background: none; border: 1px solid var(--line); color: var(--muted); border-radius: 6px; padding: 2px 8px; cursor: pointer; }
+
+select.track {
+  font: inherit; font-size: 13px; cursor: pointer;
+  padding: 3px 8px; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--text);
+}
+select.track.status-interested { background: var(--warn-soft); color: var(--warn); border-color: transparent; }
+select.track.status-registered { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
+select.track.status-submitted,
+select.track.status-done { background: var(--good-soft); color: var(--good); border-color: transparent; }
+select.track.status-not_going { color: var(--muted); }
+.card.tracked { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); }
+
+.tracker-panel { margin-top: 10px; display: grid; gap: 8px; }
+.tracker-panel .next { margin: 0; font-size: 13px; font-weight: 600; }
+.tracker-panel textarea, .tracker-panel select {
+  font: inherit; font-size: 14px; color: inherit;
+  background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px;
+}
+.tracker-panel textarea { width: 100%; resize: vertical; }
+.tracker-panel select { justify-self: start; }
+
+.mine-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 14px 0 6px; }
+.mine-tools .count { margin: 0 auto 0 0; }
+.mine-tools button, .file-button {
+  font: inherit; font-size: 13px; cursor: pointer;
+  padding: 5px 12px; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--text);
+}
+.file-button input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.file-button:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+.group { margin-top: 18px; }
+.group h2 { font-size: 16px; margin: 0 0 8px; display: inline-flex; gap: 8px; align-items: center; }
+details.group summary { cursor: pointer; list-style-position: outside; color: var(--muted); }
+details.group summary h2 { display: inline-flex; }
+.empty { color: var(--muted); padding: 24px 0; }
+.warning { background: var(--warn-soft); color: var(--warn); padding: 8px 12px; border-radius: 8px; font-size: 14px; }
 
 .more { display: block; margin: 16px auto; font: inherit; padding: 8px 18px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--text); cursor: pointer; }
 
