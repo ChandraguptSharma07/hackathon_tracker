@@ -2,6 +2,7 @@ from datetime import UTC, datetime
 
 import pytest
 
+from hackathon_tracker.models import Hackathon
 from hackathon_tracker.sources import (cerebralvalley, devfolio, devpost, dorahacks, ethglobal,
                                        hackclub, hackerearth, kaggle, lablab, luma, mlh, taikai,
                                        unstop, zindi)
@@ -184,9 +185,19 @@ def test_kaggle_uses_entry_deadline_not_final_deadline(fixture):
     assert rsna.ends_at == datetime(2026, 10, 22, 23, 59, tzinfo=UTC)
 
 
-def test_taikai_registration_closes_when_next_step_starts(fixture):
-    h = taikai.parse(fixture("taikai.html"))[0]
-    assert h.registration_deadline == datetime(2026, 10, 26, 8, 30, tzinfo=UTC)
+def test_taikai_registration_window_from_challenge_page():
+    now = datetime(2026, 10, 1, tzinfo=UTC)
+    h = Hackathon(id="taikai:x", source="taikai", title="T", url="https://taikai.network/o/hackathons/x")
+    taikai.enrich(h, {"startParticipantRegistrationDate": "2026-09-15T23:00:00.000Z",
+                      "endParticipantRegistrationDate": "2026-10-16T22:59:00.000Z"}, now)
+    assert h.registration_deadline == datetime(2026, 10, 16, 22, 59, tzinfo=UTC)
+    later = Hackathon(id="taikai:y", source="taikai", title="T", url="https://taikai.network/o/hackathons/y")
+    taikai.enrich(later, {"startParticipantRegistrationDate": "2026-11-01T00:00:00.000Z"}, now)
+    assert later.registration_note == "Registration opens Nov 01"
+
+
+def test_taikai_selection_note(fixture):
+    assert taikai.parse(fixture("taikai.html"))[0].registration_note == "Selection required"
 
 
 def test_lablab_signup_flag(fixture):
@@ -206,15 +217,74 @@ def test_unstop_open_flag(fixture):
     ({"registration_availability": "waitlist", "waitlist_active": True}, (True, "Waitlist")),
     ({"registration_availability": "open", "ticket_info": {"is_sold_out": True}},
      (False, "Full")),
+    ({"registration_availability": "sold-out"}, (False, "Full")),
+    ({"registration_availability": "coming-soon"}, (None, "Registration opens soon")),
+    ({"registration_availability": "open", "event": {"hide_rsvp": True}},
+     (False, "Registration closed")),
     ({}, (None, None)),
 ])
 def test_luma_registration_state(entry, expected):
     assert luma.registration(entry) == expected
 
 
-def test_cerebralvalley_sold_out_is_closed():
-    page = ('<script type="application/ld+json">{"@type":"ItemList","itemListElement":[{"item":'
-            '{"@type":["Event","Hackathon"],"name":"Full Hack","url":"https://cv.example/e/full",'
-            '"offers":{"availability":"https://schema.org/SoldOut"}}}]}</script>')
-    h = cerebralvalley.parse(page)[0]
-    assert (h.registration_open, h.registration_note) == (False, "Full")
+def _cv_page(record: dict) -> str:
+    import json
+    payload = "5:" + json.dumps(["$", "div", None, {"event": record}])
+    return f"<script>self.__next_f.push([1,{json.dumps(payload)}])</script>"
+
+
+@pytest.mark.parametrize("record,expected", [
+    ({"slug": "a", "approvalRequired": True, "registrationClosed": False, "capacity": None},
+     (None, "Application required")),
+    ({"slug": "b", "approvalRequired": True, "registrationClosed": True}, (False, "Registration closed")),
+    ({"slug": "c", "approvalRequired": False, "capacity": {"isFull": True}}, (False, "Full")),
+])
+def test_cerebralvalley_event_page_registration(record, expected):
+    h = Hackathon(id="cerebralvalley:x", source="cerebralvalley", title="T",
+                  url="https://cerebralvalley.ai/e/x")
+    cerebralvalley.enrich(h, cerebralvalley.event_details(_cv_page(record)))
+    assert (h.registration_open, h.registration_note) == expected
+
+
+def test_cerebralvalley_open_remote_event_is_joinable_until_end():
+    end = datetime(2026, 10, 25, tzinfo=UTC)
+    h = Hackathon(id="cerebralvalley:x", source="cerebralvalley", title="T", mode="in_person",
+                  url="https://cerebralvalley.ai/e/x", ends_at=end, location="Other")
+    cerebralvalley.enrich(h, {"slug": "x", "approvalRequired": False, "city": "Remote"})
+    assert (h.mode, h.location, h.registration_deadline) == ("online", None, end)
+
+@pytest.mark.parametrize("html,expected", [
+    ('<div class="d">Oct 23</div><div><h3>Applications Close</h3></div>'
+     '<div class="d">Nov 13</div><h3>Submissions due</h3>', datetime(2026, 10, 23, 23, 59, tzinfo=UTC)),
+    ('<p>Applications close on</p>', None),
+    ('<li>Jan 5, 2027 — Application Deadline</li>', datetime(2027, 1, 5, 23, 59, tzinfo=UTC)),
+])
+def test_hackerearth_applications_close(html, expected):
+    start = datetime(2026, 10, 5, tzinfo=UTC)
+    assert hackerearth.applications_close(html, start) == expected
+
+
+def test_hackerearth_timeline_without_year_rolls_over():
+    start = datetime(2026, 12, 20, tzinfo=UTC)
+    page = '<div>Jan 10</div><h3>Applications Close</h3>'
+    assert hackerearth.applications_close(page, start) == datetime(2027, 1, 10, 23, 59, tzinfo=UTC)
+
+
+def test_zindi_enrich_uses_submission_cutoff_and_eligibility():
+    h = zindi.parse({"data": [{"id": "sasol", "title": "Sasol", "open": True,
+                               "is_access_restricted": True, "end_time": "2026-10-18T23:59:00Z"}]})[0]
+    assert h.registration_note == "Restricted entry"
+    zindi.enrich(h, {"submissions_closed_at": "2026-10-18T23:29:00Z",
+                     "rules": {"content_text": "Who can compete: Open to residents of South Africa\nLimits"}})
+    assert h.registration_deadline == datetime(2026, 10, 18, 23, 29, tzinfo=UTC)
+    assert h.registration_note == "Open to residents of South Africa"
+    zindi.enrich(h, {"entries_closed": True, "rules": {"content_text": "Who can compete: Open to all"}})
+    assert h.registration_open is False
+
+
+def test_ethglobal_deadline_to_apply():
+    import json
+    item = {"slug": "deadline-to-apply", "name": "Deadline to Apply",
+            "startTime": "2026-10-23T18:29:00.000Z"}
+    page = f"<script>self.__next_f.push([1,{json.dumps('3:' + json.dumps([item]))}])</script>"
+    assert ethglobal.apply_deadline(page) == datetime(2026, 10, 23, 18, 29, tzinfo=UTC)

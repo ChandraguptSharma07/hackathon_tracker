@@ -63,3 +63,9 @@ def test_any_late_join_listing_counts_for_merged_events():
     h = make("cerebralvalley", mode="hybrid",
              also_on=[Listing(source="lablab", url="https://lablab.example")])
     assert infer(h).registration_deadline == END
+
+
+@pytest.mark.parametrize("source", ["hackclub", "luma"])
+def test_online_events_on_flexible_sites_stay_joinable(source):
+    assert infer(make(source, mode="online")).registration_deadline == END
+    assert infer(make(source, mode="in_person")).registration_deadline == START

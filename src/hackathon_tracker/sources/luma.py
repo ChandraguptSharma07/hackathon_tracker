@@ -28,7 +28,7 @@ HACKATHON_NAME = re.compile(
     r"hack|buildathon|datathon|ideathon|makeathon|codefest|game ?jam|build sprint", re.I)
 NOT_HACKATHON = re.compile(
     r"meetup|happy hour|mixer|networking|watch party|office hours|info session|demo night"
-    r"|hacktoberfest|workshop|growth hack", re.I)
+    r"|hacktoberfest|workshop|growth hack|celebration|after ?party|\bparty\b|social\b", re.I)
 
 
 def is_hackathon(name: str) -> bool:
@@ -36,18 +36,21 @@ def is_hackathon(name: str) -> bool:
 
 
 def registration(entry: dict) -> tuple[bool | None, str | None]:
-    """Read lu.ma's registration state: open, waitlist, sold out, needs approval."""
+    """Read lu.ma's registration state. `registration_availability` is one of open,
+    waitlist, sold-out, coming-soon or null (values from Luma's own frontend); a hidden RSVP
+    button means registration is closed."""
     availability = entry.get("registration_availability")
     ticket = entry.get("ticket_info") or {}
-    waitlist = bool(entry.get("waitlist_active"))
-    if availability == "waitlist" or (ticket.get("is_sold_out") and waitlist):
+    if (entry.get("event") or {}).get("hide_rsvp"):
+        return False, "Registration closed"
+    if availability == "waitlist" or (ticket.get("is_sold_out") and entry.get("waitlist_active")):
         return True, "Waitlist"
-    if ticket.get("is_sold_out") or availability in ("closed", "sold_out"):
+    if availability == "sold-out" or ticket.get("is_sold_out"):
         return False, "Full"
+    if availability == "coming-soon":
+        return None, "Registration opens soon"
     if availability == "open":
         return True, "Approval required" if ticket.get("require_approval") else None
-    if availability == "not_open_yet":
-        return None, "Registration not open yet"
     return None, None
 
 

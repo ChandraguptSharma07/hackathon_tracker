@@ -3,7 +3,7 @@ the listing is in __NEXT_DATA__'s Apollo cache, with nested objects stored by re
 
 import json
 import re
-from datetime import datetime
+from datetime import UTC, datetime
 
 import httpx
 
@@ -12,15 +12,6 @@ from ..parsing import to_usd, to_utc
 
 NAME = "taikai"
 URL = "https://taikai.network/hackathons"
-
-
-def _registration_end(steps: list[tuple[datetime, str]]) -> datetime | None:
-    """Registration is one of the dated steps; it closes when the next step begins."""
-    for i, (start, name) in enumerate(steps):
-        if "regist" in name.lower():
-            later = [d for d, _ in steps[i + 1:] if d > start]
-            return later[0] if later else None
-    return None
 
 
 def parse(page: str) -> list[Hackathon]:
@@ -39,9 +30,7 @@ def parse(page: str) -> list[Hackathon]:
         org = ref(c.get("organization"))
         if not org.get("slug") or not c.get("slug"):
             continue
-        steps = sorted((d, ref(s).get("name") or "") for s in c.get("steps") or []
-                       if (d := to_utc(ref(s).get("startDate"))))
-        dates = [d for d, _ in steps]
+        dates = sorted(d for s in c.get("steps") or [] if (d := to_utc(ref(s).get("startDate"))))
         decimals = c.get("prizeDecimals") or 0
         amount = (c.get("prize") or 0) / (10 ** decimals) or None
         currency = ref(c.get("prizeCurrency")).get("name") if amount else None
@@ -60,12 +49,43 @@ def parse(page: str) -> list[Hackathon]:
             prize_usd=to_usd(amount, currency),
             themes=[t for t in (ref(i).get("title") for i in c.get("industries") or []) if t],
             participants=c.get("participantsCount") or None,
-            registration_deadline=_registration_end(steps),
+            registration_note="Selection required"
+            if c.get("allowedParticipants") == "SELECTED" else None,
         ))
     return out
+
+
+def challenge_details(page: str) -> dict:
+    m = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', page, re.S)
+    if not m:
+        return {}
+    props = json.loads(m.group(1))["props"].get("pageProps") or {}
+    return (props.get("challengeProps") or {}).get("challengeBySlug") or {}
+
+
+def enrich(h: Hackathon, details: dict, now: datetime) -> Hackathon:
+    """Apply a challenge page's explicit participant registration window."""
+    opens = to_utc(details.get("startParticipantRegistrationDate"))
+    closes = to_utc(details.get("endParticipantRegistrationDate"))
+    if closes:
+        h.registration_deadline = closes
+    if opens and opens > now:
+        h.registration_note = f"Registration opens {opens:%b %d}"
+    if details.get("registrationDomainsWhiteList"):
+        h.registration_note = "Only some email domains may register"
+    return h
 
 
 def fetch(client: httpx.Client) -> list[Hackathon]:
     r = client.get(URL)
     r.raise_for_status()
-    return parse(r.text)
+    challenges = parse(r.text)
+    now = datetime.now(UTC)
+    for h in challenges:  # the listing has no registration window; each page does
+        try:
+            page = client.get(h.url)
+            page.raise_for_status()
+            enrich(h, challenge_details(page.text), now)
+        except (httpx.HTTPError, ValueError, KeyError):
+            continue
+    return challenges

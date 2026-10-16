@@ -22,6 +22,10 @@ def _ts(value) -> datetime | None:
     return datetime.fromtimestamp(value, UTC) if value else None
 
 
+def _opens_note(start: datetime | None) -> str | None:
+    return f"Registration opens {start:%b %d}" if start and start > datetime.now(UTC) else None
+
+
 def _split(value: str | None) -> list[str]:
     return [t.strip() for t in (value or "").split(",") if t.strip()]
 
@@ -53,6 +57,9 @@ def parse(payload: dict) -> list[Hackathon]:
             prize_usd=to_usd(amount, currency),
             themes=list(dict.fromkeys(_split(h.get("tags")) + _split(h.get("ecosystem"))))[:8],
             participants=h.get("hackers_count") or None,
+            # DoraHacks' own register button is enabled from start to end, whatever the venue.
+            registration_deadline=_ts(h.get("timeline_end")),
+            registration_note=_opens_note(_ts(h.get("timeline_start"))),
         ))
     return out
 

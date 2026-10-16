@@ -65,22 +65,32 @@ reminders, as one calendar file.
 ## Registration status
 
 Listings whose registration has closed are hidden by default ("Show closed registration"
-brings them back). Sites differ: Kaggle, Devpost, DoraHacks, Zindi, HackerEarth and lablab.ai
-let you join while an online event is running, while Unstop, MLH, Devfolio, lu.ma, ETHGlobal and
-most in-person events close registration before they start. `registration.py` decides the last
-moment you can join, in this order:
+brings them back). `registration.py` decides the last moment a newcomer can join, in this
+order: the site's own deadline, then the site's open/closed flag, then the site's known
+policy, then a fallback (online events and ML competitions until the end, in-person ones until
+the start). Estimated dates show with a "~"; notes such as "Waitlist", "Application required"
+or eligibility limits appear as tags. The check runs again in the browser, so a feed a few
+hours old still hides events that closed since.
 
-1. the site's own deadline (Unstop registration end, Kaggle entry deadline, Devfolio and
-   ETHGlobal application close, TAIKAI registration step, Zindi entry close);
-2. the site's open/closed flag (lu.ma full or waitlist, lablab signups off, Cerebral Valley
-   sold out);
-3. the site's policy: join until the end on late-join sites, until the start elsewhere;
-4. otherwise online events and ML competitions until the end, physical ones until the start.
+What each site was checked to do (October 2026, from help pages, live data and the sites'
+own frontend code):
 
-Estimated dates show with a "~" and say so on hover. Notes such as "Waitlist" or "Approval
-required" appear as tags, and running events you can still enter are marked "Running · open to
-join". The check runs again in the browser, so a feed a few hours old still hides events that
-closed since.
+| Site | Joining a running event | Deadline / status used |
+| --- | --- | --- |
+| Devpost | Yes, online and in person, while submissions are open | submission period end |
+| Kaggle | Yes, until the entry deadline | `prohibitNewEntrantsExplicitDeadline`, else final deadline |
+| Zindi | Yes | `entries_close_at`, else `submissions_closed_at` (30 min before end); "Who can compete" from the rules |
+| DoraHacks | Yes, register button is live from start to end | `timeline_end`; "opens" note before `timeline_start` |
+| lablab.ai | Yes for the online track (approval may apply) | `signupActive` plus end date |
+| HackerEarth | Usually yes, but some close applications early | "Applications Close" from the event page, else end (estimated) |
+| Devfolio | Per event | `reg_ends_at` |
+| Unstop | No, after registration closes | `regnRequirements.end_regn_dt`, `regn_open` |
+| ETHGlobal | No; apply, get accepted, then stake | earlier of `signupDeadline` and the page's "Deadline to Apply"; `enableHackerApplications` |
+| TAIKAI | No; registration window set per challenge | `endParticipantRegistrationDate` from the challenge page; "Selection required" for SELECTED |
+| Cerebral Valley | No; most need an approved application | event page `registrationClosed`, `capacity.isFull`, `approvalRequired`; remote events without approval stay open |
+| lu.ma | Online: yes (registration stays open by default). In person: until the start (estimated) | `registration_availability` (open, waitlist, sold-out, coming-soon), `hide_rsvp` |
+| MLH | No; each event runs its own capacity-limited application | start (estimated) |
+| Hack Club | Online: until the end. In person: until the start (both estimated) | none in data |
 
 Events listed on more than one site are merged into one entry. Well-known companies are
 detected from titles, organizers and descriptions, so you can filter for, say, every

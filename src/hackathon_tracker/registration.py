@@ -21,9 +21,10 @@ from .models import Hackathon
 
 # Sites where joining a running event is normal: submissions stay open to newcomers.
 LATE_JOIN_SOURCES = {"devpost", "kaggle", "zindi", "dorahacks", "hackerearth", "lablab"}
-# Sites where registration closes before the event starts (applications, venues).
-REGISTER_FIRST_SOURCES = {"unstop", "devfolio", "mlh", "ethglobal", "luma", "cerebralvalley",
-                          "hackclub", "taikai"}
+# Sites where registration closes before the event starts (applications, selection).
+# lu.ma and Hack Club are in neither set: their in-person events close at the start (see
+# allows_late_join), but online ones keep registration open while they run.
+REGISTER_FIRST_SOURCES = {"unstop", "devfolio", "mlh", "ethglobal", "cerebralvalley", "taikai"}
 
 
 def allows_late_join(h: Hackathon) -> bool:

@@ -11,7 +11,7 @@ from ..models import Hackathon
 from ..parsing import to_utc
 
 NAME = "mlh"
-BASE = "https://mlh.io"
+BASE = "https://www.mlh.com"  # mlh.io redirects here
 
 FORMATS = {"physical": "in_person", "digital": "online", "hybrid_physical": "hybrid",
            "hybrid_digital": "hybrid", "hybrid": "hybrid"}

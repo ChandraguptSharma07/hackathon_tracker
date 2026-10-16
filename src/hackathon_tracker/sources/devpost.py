@@ -31,9 +31,9 @@ def parse(payload: dict) -> list[Hackathon]:
             image_url=f"https:{thumb}" if thumb and thumb.startswith("//") else thumb,
             starts_at=starts,
             ends_at=ends,
-            # Online: join any time before submissions close. In person: left to
-            # registration.infer(), which closes it when the event starts.
-            registration_deadline=ends if online else None,
+            # Devpost shows "Join hackathon" while the submission period is open, for
+            # in-person events too (help.devpost.com/article/119-registering-for-a-hackathon).
+            registration_deadline=ends,
             mode="online" if online else "in_person",
             location=None if online else place.get("location"),
             prize_amount=amount or None,
