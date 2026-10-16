@@ -61,6 +61,8 @@ def parse(payload: dict) -> list[Hackathon]:
             image_url=o.get("logoUrl2"),
             ends_at=to_utc(o.get("end_date")),
             registration_deadline=to_utc(regn.get("end_regn_dt")),
+            registration_open=(bool(o["regn_open"]) and regn.get("reg_status") != "CLOSED"
+                               if "regn_open" in o else None),
             mode="online" if online else "in_person",
             location=None if online else ", ".join(
                 x for x in (addr.get("city"), addr.get("state"), country) if x) or None,

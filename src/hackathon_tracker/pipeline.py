@@ -9,7 +9,7 @@ from pathlib import Path
 
 from pydantic import BaseModel
 
-from . import places, sponsors
+from . import places, registration, sponsors
 from .dedupe import dedupe
 from .http import make_client
 from .models import Hackathon
@@ -107,7 +107,8 @@ def build_feed(sources: dict[str, Fetcher] | None = None, previous: Feed | None 
             first_seen.setdefault(listing.url, p.first_seen)
 
     current = [places.tag(sponsors.tag(h)) for h in collected if is_current(h, now)]
-    merged = dedupe(current)
+    # Infer after merging, so an explicit deadline from any listing of an event wins.
+    merged = [registration.infer(h) for h in dedupe(current)]
     for h in merged:
         h.first_seen = first_seen.get(h.id) or first_seen.get(h.url) or now
     merged.sort(key=sort_key)

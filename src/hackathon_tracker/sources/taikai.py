@@ -3,6 +3,7 @@ the listing is in __NEXT_DATA__'s Apollo cache, with nested objects stored by re
 
 import json
 import re
+from datetime import datetime
 
 import httpx
 
@@ -11,6 +12,15 @@ from ..parsing import to_usd, to_utc
 
 NAME = "taikai"
 URL = "https://taikai.network/hackathons"
+
+
+def _registration_end(steps: list[tuple[datetime, str]]) -> datetime | None:
+    """Registration is one of the dated steps; it closes when the next step begins."""
+    for i, (start, name) in enumerate(steps):
+        if "regist" in name.lower():
+            later = [d for d, _ in steps[i + 1:] if d > start]
+            return later[0] if later else None
+    return None
 
 
 def parse(page: str) -> list[Hackathon]:
@@ -29,8 +39,9 @@ def parse(page: str) -> list[Hackathon]:
         org = ref(c.get("organization"))
         if not org.get("slug") or not c.get("slug"):
             continue
-        dates = sorted(d for d in (to_utc(ref(s).get("startDate")) for s in c.get("steps") or [])
-                       if d)
+        steps = sorted((d, ref(s).get("name") or "") for s in c.get("steps") or []
+                       if (d := to_utc(ref(s).get("startDate"))))
+        dates = [d for d, _ in steps]
         decimals = c.get("prizeDecimals") or 0
         amount = (c.get("prize") or 0) / (10 ** decimals) or None
         currency = ref(c.get("prizeCurrency")).get("name") if amount else None
@@ -49,6 +60,7 @@ def parse(page: str) -> list[Hackathon]:
             prize_usd=to_usd(amount, currency),
             themes=[t for t in (ref(i).get("title") for i in c.get("industries") or []) if t],
             participants=c.get("participantsCount") or None,
+            registration_deadline=_registration_end(steps),
         ))
     return out
 

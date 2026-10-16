@@ -40,7 +40,9 @@ def parse(payload: dict) -> list[Hackathon]:
             image_url=thumbs.get(str(c["id"])) or org.get("thumbnailImageUrl"),
             starts_at=to_utc(c.get("dateEnabled")),
             ends_at=to_utc(c.get("deadline")),
-            registration_deadline=to_utc(c.get("deadline")),
+            # New teams can't enter after the entry deadline (often a week before the end).
+            registration_deadline=to_utc(c.get("prohibitNewEntrantsExplicitDeadline")
+                                         or c.get("deadline")),
             mode="online",
             prize_amount=amount,
             prize_currency=currency,

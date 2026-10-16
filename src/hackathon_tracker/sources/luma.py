@@ -35,6 +35,22 @@ def is_hackathon(name: str) -> bool:
     return bool(HACKATHON_NAME.search(name)) and not NOT_HACKATHON.search(name)
 
 
+def registration(entry: dict) -> tuple[bool | None, str | None]:
+    """Read lu.ma's registration state: open, waitlist, sold out, needs approval."""
+    availability = entry.get("registration_availability")
+    ticket = entry.get("ticket_info") or {}
+    waitlist = bool(entry.get("waitlist_active"))
+    if availability == "waitlist" or (ticket.get("is_sold_out") and waitlist):
+        return True, "Waitlist"
+    if ticket.get("is_sold_out") or availability in ("closed", "sold_out"):
+        return False, "Full"
+    if availability == "open":
+        return True, "Approval required" if ticket.get("require_approval") else None
+    if availability == "not_open_yet":
+        return None, "Registration not open yet"
+    return None, None
+
+
 def parse(payload: dict) -> list[Hackathon]:
     out = []
     for entry in payload.get("entries", []):
@@ -49,6 +65,7 @@ def parse(payload: dict) -> list[Hackathon]:
         calendar = entry.get("calendar") or {}
         hosts = [h.get("name") for h in entry.get("hosts") or [] if h.get("name")]
         city = geo.get("city")
+        reg_open, reg_note = registration(entry)
         out.append(Hackathon(
             id=f"{NAME}:{e.get('api_id') or e['url']}",
             source=NAME,
@@ -65,6 +82,8 @@ def parse(payload: dict) -> list[Hackathon]:
             city=city,
             country=geo.get("country"),
             participants=entry.get("guest_count") or None,
+            registration_open=reg_open,
+            registration_note=reg_note,
         ))
     return out
 

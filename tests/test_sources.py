@@ -176,3 +176,45 @@ def test_zindi_keeps_open_and_parses_spaced_prize(fixture):
 ])
 def test_unstop_fest_events(title, dropped):
     assert unstop.is_fest_event(title) is dropped
+
+
+def test_kaggle_uses_entry_deadline_not_final_deadline(fixture):
+    rsna = kaggle.parse(fixture("kaggle.json"))[0]
+    assert rsna.registration_deadline == datetime(2026, 10, 15, 23, 59, tzinfo=UTC)
+    assert rsna.ends_at == datetime(2026, 10, 22, 23, 59, tzinfo=UTC)
+
+
+def test_taikai_registration_closes_when_next_step_starts(fixture):
+    h = taikai.parse(fixture("taikai.html"))[0]
+    assert h.registration_deadline == datetime(2026, 10, 26, 8, 30, tzinfo=UTC)
+
+
+def test_lablab_signup_flag(fixture):
+    flags = {h.id: h.registration_open for h in lablab.parse(fixture("lablab.html"))}
+    assert flags["lablab:ibm-bob-hackathon"] is False
+    assert flags["lablab:vultr-hackathon"] is True
+
+
+def test_unstop_open_flag(fixture):
+    assert all(h.registration_open for h in unstop.parse(fixture("unstop.json")))
+
+
+@pytest.mark.parametrize("entry,expected", [
+    ({"registration_availability": "open", "ticket_info": {}}, (True, None)),
+    ({"registration_availability": "open", "ticket_info": {"require_approval": True}},
+     (True, "Approval required")),
+    ({"registration_availability": "waitlist", "waitlist_active": True}, (True, "Waitlist")),
+    ({"registration_availability": "open", "ticket_info": {"is_sold_out": True}},
+     (False, "Full")),
+    ({}, (None, None)),
+])
+def test_luma_registration_state(entry, expected):
+    assert luma.registration(entry) == expected
+
+
+def test_cerebralvalley_sold_out_is_closed():
+    page = ('<script type="application/ld+json">{"@type":"ItemList","itemListElement":[{"item":'
+            '{"@type":["Event","Hackathon"],"name":"Full Hack","url":"https://cv.example/e/full",'
+            '"offers":{"availability":"https://schema.org/SoldOut"}}}]}</script>')
+    h = cerebralvalley.parse(page)[0]
+    assert (h.registration_open, h.registration_note) == (False, "Full")

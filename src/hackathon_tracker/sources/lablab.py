@@ -20,6 +20,7 @@ def parse(page: str) -> list[Hackathon]:
         if not slug or e.get("type") != "HACKATHON" or e.get("deletedAt") or not e.get("active"):
             continue
         techs = [t for t in e.get("technologyList") or [] if isinstance(t, dict)]
+        signup = e.get("signupActive")
         seen[slug] = Hackathon(
             id=f"{NAME}:{slug}",
             source=NAME,
@@ -33,6 +34,7 @@ def parse(page: str) -> list[Hackathon]:
             themes=list(dict.fromkeys(t["techName"] for t in techs if t.get("techName"))),
             sponsors=detect(*((t.get("provider") or {}).get("name") for t in techs)),
             participants=(e.get("_count") or {}).get("participants"),
+            registration_open=signup if isinstance(signup, bool) else None,
         )
     return list(seen.values())
 

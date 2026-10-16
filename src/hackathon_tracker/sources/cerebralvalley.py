@@ -27,6 +27,19 @@ def _real(value: str | None) -> str | None:
     return value if value and value.strip() not in ("Other", "TBD", "TBA") else None
 
 
+def _availability(e: dict) -> tuple[bool | None, str | None]:
+    """schema.org Offer availability: InStock = open, SoldOut = full."""
+    offer = e.get("offers")
+    offer = offer[0] if isinstance(offer, list) and offer else offer
+    state = (offer or {}).get("availability", "").rsplit("/", 1)[-1] if isinstance(
+        offer, dict) else ""
+    if state in ("SoldOut", "Discontinued", "OutOfStock"):
+        return False, "Full"
+    if state in ("InStock", "LimitedAvailability", "OnlineOnly", "InStoreOnly"):
+        return True, None
+    return None, None
+
+
 def _is_hackathon(e: dict) -> bool:
     types = e.get("@type")
     types = types if isinstance(types, list) else [types]
@@ -46,6 +59,7 @@ def parse(page: str) -> list[Hackathon]:
             loc = e.get("location") if isinstance(e.get("location"), dict) else {}
             addr = loc.get("address") if isinstance(loc.get("address"), dict) else {}
             image = e.get("image")
+            reg_open, reg_note = _availability(e)
             out.append(Hackathon(
                 id=f"{NAME}:{e['url'].rstrip('/').rsplit('/', 1)[-1]}",
                 source=NAME,
@@ -60,6 +74,8 @@ def parse(page: str) -> list[Hackathon]:
                 location=None if mode == "online" else _real(loc.get("name")),
                 city=_real(addr.get("addressLocality")),
                 country=_real(addr.get("addressCountry")),
+                registration_open=reg_open,
+                registration_note=reg_note,
             ))
     return out
 

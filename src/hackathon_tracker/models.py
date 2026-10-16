@@ -31,7 +31,12 @@ class Hackathon(BaseModel):
 
     starts_at: datetime | None = None
     ends_at: datetime | None = None
+    # Last moment a newcomer can join. Explicit from the source, or estimated by
+    # registration.infer() (then registration_inferred is True).
     registration_deadline: datetime | None = None
+    registration_inferred: bool = False
+    registration_open: bool | None = None  # explicit flag from the source, when it has one
+    registration_note: str | None = None  # e.g. "Waitlist", "Approval required"
 
     mode: Mode | None = None
     location: str | None = None
