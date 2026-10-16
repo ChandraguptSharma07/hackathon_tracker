@@ -46,6 +46,26 @@ Kaggle and Zindi entries are tagged as ML competitions and can be filtered by Ty
 
 No source uses an AI API; everything is plain HTTP plus parsing.
 
+## Registration status
+
+Listings whose registration has closed are hidden by default ("Show closed registration"
+brings them back). Sites differ: Kaggle, Devpost, DoraHacks, Zindi, HackerEarth and lablab.ai
+let you join while an online event is running, while Unstop, MLH, Devfolio, lu.ma, ETHGlobal and
+most in-person events close registration before they start. `registration.py` decides the last
+moment you can join, in this order:
+
+1. the site's own deadline (Unstop registration end, Kaggle entry deadline, Devfolio and
+   ETHGlobal application close, TAIKAI registration step, Zindi entry close);
+2. the site's open/closed flag (lu.ma full or waitlist, lablab signups off, Cerebral Valley
+   sold out);
+3. the site's policy: join until the end on late-join sites, until the start elsewhere;
+4. otherwise online events and ML competitions until the end, physical ones until the start.
+
+Estimated dates show with a "~" and say so on hover. Notes such as "Waitlist" or "Approval
+required" appear as tags, and running events you can still enter are marked "Running · open to
+join". The check runs again in the browser, so a feed a few hours old still hides events that
+closed since.
+
 Events listed on more than one site are merged into one entry. Well-known companies are
 detected from titles, organizers and descriptions, so you can filter for, say, every
 Anthropic or OpenAI event.

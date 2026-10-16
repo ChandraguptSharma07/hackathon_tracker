@@ -131,6 +131,9 @@ button.tag { cursor: pointer; font: inherit; font-size: 12px; }
 .side { text-align: right; display: flex; flex-direction: column; gap: 6px; align-items: flex-end; font-size: 13px; }
 .prize { font-weight: 650; font-size: 15px; }
 .deadline { padding: 2px 8px; border-radius: 6px; background: var(--bg); white-space: nowrap; }
+.deadline.closed { color: var(--muted); }
+.tag.live { background: var(--good-soft); color: var(--good); border-color: transparent; }
+.tag.note { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
 .deadline.soon { background: var(--warn-soft); color: var(--warn); font-weight: 600; }
 .listed { color: var(--muted); }
 .listed a { color: var(--muted); }

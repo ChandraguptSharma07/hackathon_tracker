@@ -49,7 +49,15 @@ function prepare(h) {
   const d = (k) => (h[k] ? new Date(h[k]) : null);
   h.start = d("starts_at");
   h.end = d("ends_at");
-  h.deadline = d("registration_deadline") || h.end;
+  h.deadline = d("registration_deadline") || h.end;  // last moment a newcomer can join
+  // false = registration closed, true = open, null = no evidence. Re-checked against the
+  // viewer's clock because the feed can be hours old.
+  h.regOpen = () => {
+    if (h.registration_open === false) return false;
+    if (h.deadline) return h.deadline >= Date.now();
+    return h.registration_open ?? null;
+  };
+  h.running = () => h.start && h.start <= Date.now() && (!h.end || h.end >= Date.now());
   h.seen = d("first_seen");
   h.isNew = (days) => h.seen && h.seen > trackingSince && Date.now() - h.seen <= days * DAY;
   h.countryName = country(h.country);
@@ -87,6 +95,7 @@ function filtered() {
   const f = Object.fromEntries(new FormData(form));
   const now = Date.now();
   const terms = (f.q || "").toLowerCase().split(/\s+/).filter(Boolean);
+  hiddenClosed = 0;
   const out = all.filter((h) => {
     if (h.allSources.every((s) => disabledSources.has(s))) return false;
     if (f.kind && (h.kind || "hackathon") !== f.kind) return false;
@@ -99,11 +108,15 @@ function filtered() {
     if (f.within && !(h.deadline && h.deadline - now <= f.within * DAY && h.deadline >= now)) return false;
     if (f.prize && !h.prize_usd) return false;
     if (f.fresh && !h.isNew(7)) return false;
-    return terms.every((t) => h.haystack.includes(t));
+    if (!terms.every((t) => h.haystack.includes(t))) return false;
+    if (!f.closed && h.regOpen() === false) { hiddenClosed += 1; return false; }
+    return true;
   });
   const far = 8.64e15;
   const sorters = {
-    deadline: (a, b) => (a.deadline ?? far) - (b.deadline ?? far),
+    // Closed ones (only shown on request) go last instead of first.
+    deadline: (a, b) => (a.regOpen() === false) - (b.regOpen() === false)
+      || (a.deadline ?? far) - (b.deadline ?? far),
     start: (a, b) => (a.start ?? far) - (b.start ?? far),
     prize: (a, b) => (b.prize_usd || 0) - (a.prize_usd || 0),
     new: (a, b) => (b.seen ?? 0) - (a.seen ?? 0),
@@ -123,15 +136,20 @@ function range(start, end) {
 }
 
 function deadlineBadge(h) {
+  if (h.regOpen() === false) {
+    const text = h.running() ? "Registration closed · running" : "Registration closed";
+    return `<span class="deadline closed">${text}</span>`;
+  }
   if (!h.deadline) return "";
   const ms = h.deadline - Date.now();
-  if (ms < 0) {
-    return h.end && h.end > Date.now() ? `<span class="deadline">Happening now</span>` : "";
-  }
   const days = Math.floor(ms / DAY);
-  const hours = Math.floor(ms / 3_600_000);
-  const text = days >= 1 ? `${days} day${days === 1 ? "" : "s"} left` : `${hours}h left`;
-  return `<span class="deadline${days < 3 ? " soon" : ""}" title="Deadline ${h.deadline.toLocaleString()}">${text}</span>`;
+  const hours = Math.max(1, Math.floor(ms / 3_600_000));
+  const left = days >= 1 ? `${days} day${days === 1 ? "" : "s"}` : `${hours}h`;
+  const est = h.registration_inferred;
+  const title = est
+    ? `Estimated: this site gives no registration deadline, so this assumes you can join until ${h.deadline.toLocaleString()}`
+    : `Registration closes ${h.deadline.toLocaleString()}`;
+  return `<span class="deadline${days < 3 ? " soon" : ""}" title="${esc(title)}">${est ? "~" : ""}${left} left to join</span>`;
 }
 
 function prize(h) {
@@ -147,7 +165,9 @@ function card(h, idx) {
   const where = h.mode === "online" ? "Online"
     : [h.location || [h.city, h.countryName].filter(Boolean).join(", "), h.mode === "hybrid" ? "(hybrid)" : ""]
       .filter(Boolean).join(" ");
+  const seenUrls = new Set();
   const listings = [{ source: h.source, url: h.url }, ...(h.also_on || [])]
+    .filter((l) => !seenUrls.has(l.url) && seenUrls.add(l.url))  // one link per page
     .map((l) => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(SOURCE_NAMES[l.source] || l.source)}</a>`)
     .join(" · ");
   const img = h.image_url
@@ -165,6 +185,8 @@ function card(h, idx) {
       </p>
       <div class="tags">
         ${h.isNew(3) ? `<span class="tag new">New</span>` : ""}
+        ${h.running() && h.regOpen() !== false ? `<span class="tag live">Running · open to join</span>` : ""}
+        ${h.registration_note ? `<span class="tag note">${esc(h.registration_note)}</span>` : ""}
         ${h.kind === "competition" ? `<span class="tag kind">ML competition</span>` : ""}
         ${(h.sponsors || []).map((s) => `<button type="button" class="tag sponsor" data-sponsor="${esc(s)}">${esc(s)}</button>`).join("")}
         ${(h.themes || []).slice(0, 4).map((t) => `<span class="tag">${esc(t)}</span>`).join("")}
@@ -180,11 +202,13 @@ function card(h, idx) {
 }
 
 let current = [];
+let hiddenClosed = 0;  // matches of the other filters left out only for closed registration
 
 function render() {
   writeState();
   current = filtered();
-  $("#count").textContent = `${current.length} of ${all.length} listings`;
+  const hidden = hiddenClosed ? ` · ${hiddenClosed} with closed registration hidden` : "";
+  $("#count").textContent = `${current.length} of ${all.length} listings${hidden}`;
   $("#list").innerHTML = current.slice(0, shown).map(card).join("");
   $("#more").hidden = current.length <= shown;
 }
@@ -231,7 +255,7 @@ function downloadIcs(h) {
     `UID:${h.id}@hackathon-tracker`, `DTSTAMP:${icsDate(new Date())}`,
     `DTSTART:${icsDate(start)}`, `DTEND:${icsDate(end)}`,
     `SUMMARY:${text(h.title)}`, `URL:${h.url}`,
-    `DESCRIPTION:${text([h.organizer, h.deadline ? `Deadline: ${h.deadline.toUTCString()}` : "", h.url].filter(Boolean).join("\n"))}`,
+    `DESCRIPTION:${text([h.organizer, h.deadline ? `Join by: ${h.deadline.toUTCString()}${h.registration_inferred ? " (estimated)" : ""}` : "", h.url].filter(Boolean).join("\n"))}`,
     h.mode !== "online" && h.location ? `LOCATION:${text(h.location)}` : "",
     "END:VEVENT", "END:VCALENDAR",
   ].filter(Boolean);
@@ -296,7 +320,7 @@ async function main() {
   health(feed);
   const updated = new Date(feed.generated_at);
   $("#summary").textContent =
-    `${all.length} open and upcoming hackathons and competitions from ${Object.keys(feed.sources).length} sites · updated ${updated.toLocaleString()}`;
+    `${all.filter((h) => h.regOpen() !== false).length} hackathons and competitions open to join, from ${Object.keys(feed.sources).length} sites · updated ${updated.toLocaleString()}`;
   render();
 }
 
